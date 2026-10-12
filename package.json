@@ -1,0 +1,9 @@
+{
+  "name": "worthmypeace-app",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@memberstack/admin": "^1.3.1",
+    "@netlify/blobs": "^8.1.0"
+  }
+}

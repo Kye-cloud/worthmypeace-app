@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is This Worth My Peace? — worthmypeace.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#faf6ef; --parchment:#f3ead8;
+  --sage:#7a9e7e; --sage-light:#a8c5ac; --sage-pale:#d6e8d8;
+  --purple:#7b5ea7; --purple-light:#b39dcc; --purple-pale:#e8dff2;
+  --gold:#c9963a; --gold-light:#e8c97a; --gold-pale:#f5e9c8;
+  --text-dark:#3a3040; --text-mid:#6b5f72; --text-soft:#9b8fa8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
+
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 0%,rgba(168,197,172,0.22) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 60% at 100% 0%,rgba(179,157,204,0.18) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 70% at 100% 100%,rgba(232,201,122,0.14) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 50% at 0% 100%,rgba(123,94,167,0.1) 0%,transparent 55%);}
+
+.bot{position:fixed;pointer-events:none;z-index:1;opacity:0.42;}
+.bot-tl{top:-6px;left:-6px;width:210px;}
+.bot-br{bottom:-6px;right:-6px;width:190px;transform:rotate(180deg);}
+.bot-tr{top:-6px;right:-6px;width:170px;transform:scaleX(-1);}
+
+.view{display:none;position:relative;z-index:2;}
+.view.active{display:block;}
+
+/* ══ NAV ══ */
+.lp-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:15px 44px;background:rgba(250,246,239,0.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(179,157,204,0.14);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--purple);}
+.nav-logo span{color:var(--gold);font-style:normal;}
+.nav-links{display:flex;gap:26px;align-items:center;}
+.nav-links a{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--purple);}
+.btn-nav{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;padding:10px 22px;border-radius:30px;border:none;cursor:pointer;background:var(--purple);color:white;box-shadow:0 3px 14px rgba(123,94,167,0.28);transition:all 0.25s;}
+.btn-nav:hover{background:#6a4f92;transform:translateY(-1px);}
+
+/* ══ HERO ══ */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 40px 80px;text-align:center;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 15% 20%,rgba(168,197,172,0.28) 0%,transparent 60%),radial-gradient(ellipse 55% 65% at 85% 15%,rgba(179,157,204,0.22) 0%,transparent 55%),radial-gradient(ellipse 50% 60% at 85% 85%,rgba(232,201,122,0.18) 0%,transparent 55%),radial-gradient(ellipse 55% 45% at 15% 85%,rgba(123,94,167,0.12) 0%,transparent 55%),var(--cream);}
+.hero-bot-svg{position:absolute;pointer-events:none;opacity:0.48;}
+.h-tl{top:0;left:0;width:280px;} .h-tr{top:0;right:0;width:240px;transform:scaleX(-1);} .h-br{bottom:0;right:0;width:250px;transform:scale(-1);}
+.hero-content{position:relative;z-index:2;max-width:680px;}
+.dove-anim{display:inline-block;margin-bottom:22px;animation:float 7s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10.5px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0;animation:fadeUp 0.9s ease 0.3s forwards;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:400;color:var(--purple);line-height:1.05;margin-bottom:18px;opacity:0;animation:fadeUp 0.9s ease 0.5s forwards;}
+.hero-title em{font-style:italic;font-weight:300;color:var(--purple-light);}
+.hero-div{display:flex;align-items:center;justify-content:center;gap:14px;margin:20px auto;opacity:0;animation:fadeUp 0.9s ease 0.63s forwards;}
+.hero-div::before,.hero-div::after{content:'';width:70px;height:1px;}
+.hero-div::before{background:linear-gradient(90deg,transparent,var(--gold-light));}
+.hero-div::after{background:linear-gradient(90deg,var(--gold-light),transparent);}
+.hero-sub{font-style:italic;font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--text-mid);line-height:1.7;margin-bottom:34px;opacity:0;animation:fadeUp 0.9s ease 0.75s forwards;}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s ease 0.9s forwards;}
+.btn-primary{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;padding:16px 36px;border-radius:30px;border:none;cursor:pointer;background:var(--purple);color:white;box-shadow:0 6px 24px rgba(123,94,167,0.35);transition:all 0.3s;}
+.btn-primary:hover{background:#6a4f92;transform:translateY(-2px);}
+.btn-secondary{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;padding:15px 30px;border-radius:30px;cursor:pointer;background:transparent;color:var(--purple);border:1.5px solid var(--purple-light);transition:all 0.25s;}
+.btn-secondary:hover{background:var(--purple-pale);}
+.hero-note{margin-top:20px;font-size:0.85rem;color:var(--text-soft);font-style:italic;opacity:0;animation:fadeUp 0.9s ease 1.05s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.trust-bar{background:rgba(255,255,255,0.42);border-top:1px solid rgba(179,157,204,0.17);border-bottom:1px solid rgba(179,157,204,0.17);padding:18px 40px;display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;}
+.trust-text{font-family:'Josefin Sans',sans-serif;font-size:9.5px;letter-spacing:0.17em;text-transform:uppercase;color:var(--text-mid);}
+
+.lp-section{padding:88px 40px;position:relative;z-index:2;}
+.lp-inner{max-width:1000px;margin:0 auto;}
+.s-label{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:13px;text-align:center;}
+.s-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:400;color:var(--purple);text-align:center;line-height:1.15;margin-bottom:14px;}
+.s-heading em{font-style:italic;font-weight:300;color:var(--purple-light);}
+.s-body{font-style:italic;color:var(--text-mid);font-size:1.08rem;line-height:1.7;text-align:center;max-width:560px;margin:0 auto 50px;}
+
+.feat-bg{background:linear-gradient(180deg,var(--cream) 0%,rgba(232,223,242,0.12) 50%,var(--cream) 100%);}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:20px;}
+.feat-card{background:rgba(255,255,255,0.55);border:1px solid rgba(179,157,204,0.17);border-radius:18px;padding:28px 26px;backdrop-filter:blur(6px);transition:transform 0.25s,box-shadow 0.25s;position:relative;overflow:hidden;}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-light),var(--purple-light),var(--gold-light));}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 12px 38px rgba(123,94,167,0.11);}
+.feat-icon{font-size:1.8rem;margin-bottom:12px;display:block;}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--purple);margin-bottom:7px;}
+.feat-desc{font-style:italic;color:var(--text-mid);font-size:0.95rem;line-height:1.65;}
+
+.inside-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+.inside-card{padding:26px 22px;border-radius:16px;text-align:center;border:1px solid rgba(179,157,204,0.18);position:relative;overflow:hidden;transition:transform 0.2s;}
+.inside-card:hover{transform:translateY(-3px);}
+.ic-mind{background:linear-gradient(135deg,rgba(214,232,216,0.38),rgba(250,246,239,0.55));}
+.ic-heart{background:linear-gradient(135deg,rgba(232,223,242,0.38),rgba(250,246,239,0.55));}
+.ic-body{background:linear-gradient(135deg,rgba(214,232,216,0.35),rgba(232,223,242,0.28));}
+.ic-spirit{background:linear-gradient(135deg,rgba(245,233,200,0.42),rgba(232,223,242,0.32));}
+.ic-icon{font-size:1.9rem;margin-bottom:9px;display:block;}
+.ic-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--purple);margin-bottom:7px;}
+.ic-desc{font-size:0.86rem;color:var(--text-soft);font-style:italic;line-height:1.58;}
+
+.test-bg{background:linear-gradient(135deg,rgba(123,94,167,0.05),rgba(201,150,58,0.05));}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:18px;}
+.test-card{background:rgba(255,255,255,0.6);border:1px solid rgba(179,157,204,0.18);border-radius:16px;padding:26px 24px;backdrop-filter:blur(6px);position:relative;}
+.test-card::before{content:'❝';position:absolute;top:12px;left:18px;font-size:2.4rem;color:rgba(123,94,167,0.1);font-family:Georgia,serif;line-height:1;}
+.t-stars{color:var(--gold);font-size:0.82rem;margin-bottom:9px;letter-spacing:2px;}
+.t-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--text-dark);line-height:1.6;margin-bottom:14px;}
+.t-name{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);}
+
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:18px;max-width:700px;margin:0 auto;}
+.price-card{border-radius:20px;padding:34px 28px;text-align:center;border:1.5px solid rgba(179,157,204,0.22);background:rgba(255,255,255,0.55);position:relative;overflow:hidden;transition:transform 0.25s,box-shadow 0.25s;}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(123,94,167,0.12);}
+.price-card.featured{border-color:var(--purple);background:rgba(232,223,242,0.22);}
+.price-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--purple);color:white;font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:6px 18px;border-radius:0 0 12px 12px;}
+.price-plan{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-soft);margin-bottom:13px;margin-top:10px;}
+.price-amt{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--purple);line-height:1;}
+.price-per{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-soft);margin:5px 0 18px;}
+.price-feats{list-style:none;margin-bottom:26px;display:flex;flex-direction:column;gap:9px;text-align:left;}
+.price-feats li{display:flex;align-items:center;gap:9px;font-size:0.96rem;color:var(--text-dark);}
+.pfy{color:var(--sage);} .pfn{color:var(--text-soft);font-size:0.83rem;}
+.btn-plan{width:100%;font-family:'Josefin Sans',sans-serif;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;padding:14px;border-radius:30px;border:none;cursor:pointer;transition:all 0.25s;}
+.btn-plan.free{background:transparent;color:var(--purple);border:1.5px solid var(--purple-light);}
+.btn-plan.free:hover{background:var(--purple-pale);}
+.btn-plan.paid{background:var(--purple);color:white;box-shadow:0 4px 18px rgba(123,94,167,0.3);}
+.btn-plan.paid:hover{background:#6a4f92;transform:translateY(-1px);}
+
+.email-sec{padding:76px 40px;text-align:center;background:linear-gradient(135deg,rgba(123,94,167,0.07),rgba(201,150,58,0.06));border-top:1px solid rgba(179,157,204,0.17);}
+.email-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
+.email-input{font-family:'Crimson Pro',serif;font-size:1rem;font-style:italic;padding:14px 22px;border-radius:30px;border:1.5px solid rgba(179,157,204,0.32);background:rgba(255,255,255,0.72);outline:none;width:275px;color:var(--text-dark);transition:border-color 0.2s,background 0.2s;}
+.email-input::placeholder{color:var(--text-soft);}
+.email-input:focus{border-color:var(--purple-light);background:rgba(255,255,255,0.96);}
+.email-note{font-size:0.84rem;font-style:italic;color:var(--text-soft);margin-top:11px;}
+.email-toast{display:none;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);margin-top:13px;}
+.email-toast.show{display:block;}
+
+.lp-footer{padding:44px 40px 28px;text-align:center;border-top:1px solid rgba(179,157,204,0.14);position:relative;z-index:2;}
+.foot-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--purple);margin-bottom:7px;}
+.foot-tag{font-style:italic;color:var(--text-soft);font-size:0.88rem;margin-bottom:18px;}
+.foot-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;}
+.foot-links a{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-soft);text-decoration:none;transition:color 0.2s;}
+.foot-links a:hover{color:var(--purple);}
+.foot-copy{margin-top:20px;font-size:0.78rem;color:var(--text-soft);}
+
+/* ══ APP STYLES ══ */
+.app-topbar{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:13px 26px;background:rgba(250,246,239,0.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(179,157,204,0.17);}
+.app-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--purple);}
+.app-logo span{color:var(--gold);font-style:normal;}
+.app-bar-right{display:flex;gap:9px;align-items:center;}
+.badge-premium-on{font-family:'Josefin Sans',sans-serif;font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;padding:5px 14px;border-radius:20px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:white;border:none;box-shadow:0 2px 10px rgba(201,150,58,0.3);}
+.btn-back{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;border:1px solid rgba(179,157,204,0.4);color:var(--text-mid);padding:5px 13px;border-radius:20px;cursor:pointer;transition:all 0.2s;}
+.btn-back:hover{border-color:var(--purple-light);color:var(--purple);}
+.test-banner{background:linear-gradient(90deg,rgba(201,150,58,0.12),rgba(123,94,167,0.1));border-bottom:1px solid rgba(201,150,58,0.2);padding:8px 20px;text-align:center;font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);}
+
+.app-body{max-width:780px;margin:0 auto;padding:0 20px 90px;}
+
+.j-cover{text-align:center;padding:48px 20px 38px;}
+.j-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;opacity:0;animation:fadeUp 0.8s ease 0.2s forwards;}
+.j-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5.5vw,3.4rem);font-weight:400;color:var(--purple);line-height:1.1;margin-bottom:14px;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards;}
+.j-title em{font-style:italic;font-weight:300;color:var(--purple-light);}
+.j-divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px auto;opacity:0;animation:fadeUp 0.8s ease 0.52s forwards;}
+.j-divider::before,.j-divider::after{content:'';width:55px;height:1px;}
+.j-divider::before{background:linear-gradient(90deg,transparent,var(--gold-light));}
+.j-divider::after{background:linear-gradient(90deg,var(--gold-light),transparent);}
+.j-sub{font-style:italic;color:var(--text-mid);font-size:1.05rem;line-height:1.65;opacity:0;animation:fadeUp 0.8s ease 0.64s forwards;}
+
+.sec-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:34px 0 26px;opacity:0;animation:fadeUp 0.8s ease 0.8s forwards;}
+.tab-btn{font-family:'Josefin Sans',sans-serif;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;padding:9px 17px;border-radius:30px;border:1.5px solid var(--purple-light);background:transparent;color:var(--purple);cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:5px;}
+.tab-btn:hover{background:var(--purple-pale);}
+.tab-btn.active{background:var(--purple);color:white;border-color:var(--purple);box-shadow:0 4px 14px rgba(123,94,167,0.24);}
+
+.sec-panel{display:none;} .sec-panel.active{display:block;}
+
+.sec-hdr{text-align:center;padding:30px 26px 26px;background:rgba(255,255,255,0.5);border-radius:18px;border:1px solid rgba(179,157,204,0.2);backdrop-filter:blur(8px);margin-bottom:26px;position:relative;overflow:hidden;}
+.sec-hdr::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-light),var(--purple-light),var(--gold-light));}
+.sec-icon{font-size:2rem;margin-bottom:8px;display:block;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:500;color:var(--purple);margin-bottom:6px;}
+.sec-desc{font-style:italic;color:var(--text-mid);font-size:1rem;line-height:1.6;}
+
+.ritual{background:linear-gradient(135deg,rgba(214,232,216,0.36),rgba(232,223,242,0.36));border:1px solid rgba(168,197,172,0.32);border-radius:14px;padding:19px 22px;margin-bottom:22px;display:flex;gap:15px;align-items:flex-start;}
+.ritual-icon{font-size:1.55rem;flex-shrink:0;}
+.ritual-lbl{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--sage);margin-bottom:5px;}
+.ritual-txt{font-style:italic;color:var(--text-mid);line-height:1.68;font-size:0.95rem;}
+
+.prompts{display:grid;gap:16px;margin-bottom:22px;}
+.p-card{background:rgba(255,255,255,0.6);border:1px solid rgba(179,157,204,0.17);border-radius:14px;padding:20px 22px 17px;backdrop-filter:blur(6px);transition:transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;}
+.p-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--purple-light),var(--sage-light));}
+.p-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(123,94,167,0.09);}
+.p-num{font-family:'Josefin Sans',sans-serif;font-size:8.5px;letter-spacing:0.24em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.p-q{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:500;color:var(--purple);line-height:1.42;margin-bottom:13px;}
+.p-ta{width:100%;min-height:92px;background:rgba(250,246,239,0.65);border:1px solid rgba(179,157,204,0.2);border-radius:10px;padding:11px 13px;font-family:'Crimson Pro',serif;font-size:0.97rem;color:var(--text-dark);resize:vertical;outline:none;transition:border-color 0.2s,background 0.2s;line-height:1.7;}
+.p-ta::placeholder{color:var(--text-soft);font-style:italic;}
+.p-ta:focus{border-color:var(--purple-light);background:rgba(255,255,255,0.92);}
+
+.score-card{background:rgba(255,255,255,0.58);border:1px solid rgba(201,150,58,0.2);border-radius:14px;padding:24px;margin-bottom:22px;text-align:center;}
+.sc-lbl{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.28rem;color:var(--purple);margin-bottom:4px;}
+.sc-sub{font-style:italic;color:var(--text-soft);font-size:0.86rem;margin-bottom:18px;}
+.score-dots{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;}
+.s-dot{width:37px;height:37px;border-radius:50%;border:2px solid rgba(179,157,204,0.32);background:transparent;font-family:'Josefin Sans',sans-serif;font-size:12px;color:var(--text-mid);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.s-dot:hover{border-color:var(--purple);background:var(--purple-pale);color:var(--purple);transform:scale(1.1);}
+.s-dot.sel{background:var(--purple);border-color:var(--purple);color:white;transform:scale(1.12);box-shadow:0 3px 12px rgba(123,94,167,0.32);}
+.sc-msg{margin-top:13px;font-style:italic;color:var(--text-mid);font-size:0.95rem;min-height:21px;}
+
+.rr{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:22px;}
+@media(max-width:500px){.rr{grid-template-columns:1fr;}}
+.rr-card{border-radius:14px;padding:18px 16px;}
+.rr-rel{background:rgba(214,232,216,0.3);border:1px solid rgba(122,158,126,0.26);}
+.rr-rec{background:rgba(232,223,242,0.3);border:1px solid rgba(179,157,204,0.26);}
+.rr-icon{font-size:1.25rem;margin-bottom:5px;display:block;}
+.rr-lbl{font-family:'Josefin Sans',sans-serif;font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage);margin-bottom:9px;}
+.rr-rec .rr-lbl{color:var(--purple);}
+
+.aff-card{background:linear-gradient(135deg,rgba(123,94,167,0.07),rgba(201,150,58,0.07));border:1px solid rgba(123,94,167,0.17);border-radius:14px;padding:26px;text-align:center;margin-bottom:22px;position:relative;}
+.aff-card::after{content:'❝';position:absolute;top:9px;left:16px;font-size:2.5rem;color:rgba(123,94,167,0.1);font-family:Georgia,serif;line-height:1;}
+.aff-lbl{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--sage);margin-bottom:11px;}
+.aff-txt{font-family:'Cormorant Garamond',serif;font-size:1.38rem;font-style:italic;font-weight:300;color:var(--purple);line-height:1.55;}
+
+.months{display:grid;gap:9px;margin-bottom:26px;}
+.m-row{display:flex;align-items:flex-start;gap:14px;padding:14px 20px;background:rgba(255,255,255,0.52);border-radius:12px;border:1px solid rgba(179,157,204,0.15);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;flex-wrap:wrap;}
+.m-row:hover{transform:translateX(4px);box-shadow:0 4px 14px rgba(123,94,167,0.08);}
+.m-row.open{background:rgba(232,223,242,0.17);}
+.m-name{font-family:'Josefin Sans',sans-serif;font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);min-width:84px;padding-top:3px;}
+.m-dash{color:var(--text-soft);font-size:0.95rem;padding-top:1px;}
+.m-aff{font-family:'Crimson Pro',serif;font-size:1rem;color:var(--text-dark);line-height:1.5;flex:1;}
+.m-note{display:none;width:100%;margin-top:7px;}
+.m-row.open .m-note{display:block;}
+.yr-close{text-align:center;padding:26px 14px;}
+.yr-heart{color:var(--gold);font-size:1.25rem;margin-bottom:9px;display:block;}
+.yr-txt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--purple);line-height:1.7;font-weight:300;}
+
+/* Weekly check-in */
+.weekly-card{background:rgba(255,255,255,0.55);border:1px solid rgba(201,150,58,0.2);border-radius:14px;padding:24px 22px;margin-bottom:22px;}
+.wk-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--purple);margin-bottom:18px;text-align:center;}
+.wk-grid{display:grid;gap:12px;}
+.wk-q{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--text-mid);margin-bottom:6px;}
+
+/* Dear Peace letter */
+.letter-card{background:linear-gradient(135deg,rgba(232,223,242,0.25),rgba(245,233,200,0.2));border:1px solid rgba(179,157,204,0.22);border-radius:14px;padding:24px 22px;margin-bottom:22px;}
+.letter-head{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;color:var(--purple);margin-bottom:8px;}
+.letter-sub{font-style:italic;color:var(--text-soft);font-size:0.88rem;margin-bottom:13px;}
+
+.save-bar{display:block;}
+.btn-save{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.17em;text-transform:uppercase;padding:10px 22px;border-radius:30px;border:none;cursor:pointer;transition:all 0.25s;}
+.btn-save.pri{background:var(--purple);color:white;box-shadow:0 3px 13px rgba(123,94,167,0.26);}
+.btn-save.pri:hover{background:#6a4f92;transform:translateY(-1px);}
+.btn-save.sec{background:transparent;color:var(--purple);border:1.5px solid var(--purple-light);}
+.btn-save.sec:hover{background:var(--purple-pale);}
+.save-toast{display:none;align-items:center;gap:6px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);padding:10px 16px;border-radius:30px;background:rgba(214,232,216,0.58);border:1px solid rgba(122,158,126,0.28);}
+.save-toast.show{display:flex;}
+
+@media(max-width:640px){
+  .lp-nav{padding:13px 20px;} .nav-links{display:none;}
+  .lp-section{padding:68px 20px;} .hero{padding:96px 20px 58px;} .email-sec{padding:60px 20px;}
+}
+
+/* ── Year of Peace sub-tabs ── */
+.yop-tabs{display:flex;gap:8px;margin-bottom:22px;justify-content:center;flex-wrap:wrap;}
+.yop-tab{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;padding:8px 18px;border-radius:30px;border:1.5px solid var(--purple-light);background:transparent;color:var(--purple);cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:6px;}
+.yop-tab:hover{background:var(--purple-pale);}
+.yop-tab.active{background:var(--purple);color:white;border-color:var(--purple);box-shadow:0 3px 12px rgba(123,94,167,0.24);}
+.yop-panel{display:none;}
+.yop-panel.active{display:block;}
+/* ── Annual intention card ── */
+.annual-card{background:linear-gradient(135deg,rgba(123,94,167,0.07),rgba(201,150,58,0.07));border:1px solid rgba(123,94,167,0.2);border-radius:18px;padding:28px 26px;margin-bottom:22px;position:relative;overflow:hidden;}
+.annual-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-light),var(--purple-light),var(--gold-light));}
+.annual-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.annual-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--purple);margin-bottom:6px;line-height:1.3;}
+.annual-sub{font-style:italic;color:var(--text-mid);font-size:0.9rem;line-height:1.6;margin-bottom:18px;}
+.annual-ta{width:100%;min-height:80px;background:rgba(250,246,239,0.7);border:1px solid rgba(179,157,204,0.25);border-radius:10px;padding:13px 15px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--purple);resize:vertical;outline:none;transition:border-color 0.2s,background 0.2s;line-height:1.7;}
+.annual-ta::placeholder{color:var(--purple-light);font-style:italic;}
+.annual-ta:focus{border-color:var(--purple);background:rgba(255,255,255,0.92);}
+.annual-divider{display:flex;align-items:center;gap:10px;margin:18px 0;}
+.annual-divider::before,.annual-divider::after{content:'';flex:1;height:1px;}
+.annual-divider::before{background:linear-gradient(90deg,transparent,rgba(201,150,58,0.3));}
+.annual-divider::after{background:linear-gradient(90deg,rgba(201,150,58,0.3),transparent);}
+/* ── Custom monthly intentions ── */
+.my-month-row{background:rgba(255,255,255,0.55);border:1px solid rgba(179,157,204,0.18);border-radius:13px;padding:16px 20px;margin-bottom:10px;transition:box-shadow 0.2s;}
+.my-month-row:hover{box-shadow:0 4px 16px rgba(123,94,167,0.09);}
+.my-month-label{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.my-month-ta{width:100%;min-height:56px;background:rgba(250,246,239,0.65);border:1px solid rgba(179,157,204,0.2);border-radius:9px;padding:10px 13px;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--purple);resize:vertical;outline:none;transition:border-color 0.2s,background 0.2s;line-height:1.6;}
+.my-month-ta::placeholder{color:var(--purple-light);font-style:italic;}
+.my-month-ta:focus{border-color:var(--purple);background:rgba(255,255,255,0.92);}
+.lock-sm{font-size:9px;opacity:0.75;}
+.intentions-close{text-align:center;padding:24px 14px 8px;}
+.intentions-close-heart{color:var(--gold);font-size:1.2rem;margin-bottom:8px;display:block;}
+.intentions-close-txt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--purple);line-height:1.65;font-weight:300;}
+
+
+.ms-btn{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border-radius:20px;border:none;cursor:pointer;}
+.ms-btn-login{background:transparent;color:var(--purple);border:1.5px solid var(--purple-light);}
+.ms-btn-signup{background:var(--purple);color:white;}
+.ms-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;}
+.ms-modal{background:white;border-radius:20px;padding:30px;max-width:380px;width:90%;}
+
+.pw-wall{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(250,246,239,.97);z-index:9000;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;}
+.pw-icon{font-size:2.2rem;margin-bottom:12px;}
+.pw-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#7b5ea7;margin-bottom:8px;}
+.pw-sub{font-style:italic;color:#6b5f72;font-size:.9rem;line-height:1.7;margin-bottom:22px;max-width:300px;}
+.pw-btn{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:13px 22px;border-radius:30px;border:none;cursor:pointer;margin:5px;display:inline-block;}
+.pw-btn-m{background:#7b5ea7;color:white;}
+.pw-btn-a{background:#c9963a;color:white;}
+.pw-note{font-style:italic;color:#9b8fa8;font-size:.8rem;margin-top:14px;}
+.pw-note a{color:#7b5ea7;cursor:pointer;text-decoration:underline;}
+
+
+.entry-date-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 0 16px;}
+.entry-date-label{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--purple);font-style:italic;}
+.btn-new-entry{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:8px 16px;border-radius:20px;border:1px solid var(--purple);color:var(--purple);background:transparent;cursor:pointer;}
+.btn-new-entry:hover{background:var(--purple);color:white;}
+.btn-save-entry{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:10px 22px;border-radius:20px;border:none;background:var(--purple);color:white;cursor:pointer;margin-top:16px;width:100%;}
+.prev-entries{margin-top:28px;}
+.prev-entries-label{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.prev-entry-row{border:1px solid rgba(179,157,204,.2);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.prev-entry-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;background:rgba(255,255,255,.4);}
+.prev-entry-date{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--purple);font-style:italic;}
+.prev-entry-score{font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.15em;color:var(--gold);}
+.prev-entry-chevron{color:var(--text-soft);font-size:.8rem;transition:transform .2s;}
+.prev-entry-row.open .prev-entry-chevron{transform:rotate(180deg);}
+.prev-entry-body{display:none;padding:14px 16px;background:rgba(255,255,255,.25);}
+.prev-entry-row.open .prev-entry-body{display:block;}
+.prev-entry-q{font-family:'Josefin Sans',sans-serif;font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-soft);margin-bottom:3px;margin-top:10px;}
+.prev-entry-a{font-family:'Crimson Pro',serif;font-size:.95rem;color:var(--text-dark);line-height:1.6;}
+
+</style>
+
+<script>
+var _authMode = 'signup';
+
+function showAuthModal(mode) {
+  _authMode = mode;
+  var o = document.getElementById('ms-overlay');
+  o.style.display = 'flex';
+  ['login','signup','forgot','otp'].forEach(function(p) {
+    var el = document.getElementById('ms-panel-' + p);
+    if (el) el.style.display = p === mode ? 'block' : 'none';
+  });
+}
+
+async function doAuth() {
+  var email = document.getElementById('auth-email').value.trim();
+  var pass = document.getElementById('auth-password').value;
+  var err = document.getElementById('auth-error');
+  var btn = document.getElementById('auth-btn');
+  err.textContent = '';
+  if (!email || !pass) { err.textContent = 'Please enter email and password.'; return; }
+  if (_authMode === 'signup' && pass.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
+  if (!window.$memberstackDom) { err.textContent = 'Auth service not ready. Please refresh.'; return; }
+  btn.disabled = true;
+  btn.textContent = _authMode === 'login' ? 'Logging in...' : 'Creating account...';
+  try {
+    var r;
+    if (_authMode === 'login') {
+      r = await window.$memberstackDom.loginMemberEmailPassword({ email: email, password: pass });
+    } else {
+      r = await window.$memberstackDom.signupMemberEmailPassword({ email: email, password: pass });
+    }
+    document.getElementById('ms-overlay').style.display = 'none';
+    alert('Success! Welcome ' + (r.data.member.auth.email || '') + ' 🕊️');
+  } catch(e) {
+    err.textContent = e.message || (_authMode === 'login' ? 'Login failed.' : 'Signup failed.');
+    btn.disabled = false;
+    btn.textContent = _authMode === 'login' ? '✦ Log In' : '✦ Create Free Account';
+  }
+}
+async function doSignup() {
+  var email = document.getElementById('signup-email').value.trim();
+  var pass = document.getElementById('signup-password').value;
+  var err = document.getElementById('signup-error');
+  var btn = document.getElementById('signup-btn');
+  err.textContent = '';
+  if (!email || !pass) { err.textContent = 'Please enter email and password.'; return; }
+  if (pass.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
+  if (!window.$memberstackDom) { err.textContent = 'Auth not ready. Please refresh.'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Creating account...';
+  try {
+    var r = await window.$memberstackDom.signupMemberEmailPassword({ email: email, password: pass });
+    document.getElementById('ms-overlay').style.display = 'none';
+    var fullMember = await window.$memberstackDom.getCurrentMember();
+    if (fullMember && fullMember.data) {
+      onMsLoggedIn(fullMember.data);
+    } else if (r.data && r.data.member) {
+      onMsLoggedIn(r.data.member);
+    }
+  } catch(e) {
+    err.textContent = e.message || 'Signup failed. Please try again.';
+    btn.disabled = false;
+    btn.textContent = '✦ Create Free Account';
+  }
+}
+
+
+function openModal() {
+  showAuthModal('signup');
+}
+function openUpgrade() { showAuthModal('signup'); }
+function openApp() { window.location.href = 'https://app.worthmypeace.com'; }
+function backToLanding() { window.location.href = 'https://worthmypeace.com'; }
+</script>
+  <script data-memberstack-app="app_cmq6wh6r5000a0tyabdsofam2" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
+<script>
+window._isPremium = false;
+</script>
+<script>
+// Paywall + switchSec — defined in head before anything else
+window._isPremium = false;
+
+function showPW(id) {
+  var el = document.getElementById('pw-'+id);
+  if (el) el.style.display = 'flex';
+}
+
+function hidePW() {
+  document.querySelectorAll('.pw-wall').forEach(function(el) {
+    el.style.display = 'none';
+  });
+}
+
+function switchSec(id) {
+  var premium = ['heart','body','spirit','year'];
+  if (premium.indexOf(id) !== -1 && !window._isPremium) {
+    hidePW();
+    showPW(id);
+    // Still highlight the tab
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    var tab = document.querySelector('[data-s="'+id+'"]');
+    if (tab) tab.classList.add('active');
+    return;
+  }
+  hidePW();
+  document.querySelectorAll('.sec-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  var sec = document.getElementById('sec-'+id);
+  if (sec) sec.classList.add('active');
+  var tab = document.querySelector('[data-s="'+id+'"]');
+  if (tab) tab.classList.add('active');
+}
+
+function unlockAll() {
+  window._isPremium = true;
+  hidePW();
+}
+</script>
+<script>
+async function upgradeMonthly() {
+  if (!window.$memberstackDom) { alert('Please refresh and try again.'); return; }
+  // Must be logged in to purchase through Memberstack
+  if (!window._msCurrentMember) {
+    showAuthModal('signup');
+    return;
+  }
+  try {
+    await window.$memberstackDom.purchasePlansWithCheckout({
+      priceId: 'prc_premium-monthly-15g0amo'
+    });
+  } catch(e) {
+    alert('Unable to open checkout. Please try again.');
+  }
+}
+
+async function upgradeAnnual() {
+  if (!window.$memberstackDom) { alert('Please refresh and try again.'); return; }
+  // Must be logged in to purchase through Memberstack
+  if (!window._msCurrentMember) {
+    showAuthModal('signup');
+    return;
+  }
+  try {
+    await window.$memberstackDom.purchasePlansWithCheckout({
+      priceId: 'prc_premium-annual-v07e0jrn'
+    });
+  } catch(e) {
+    alert('Unable to open checkout. Please try again.');
+  }
+}
+</script>
+<script>
+// Check member status on page load — handles post-checkout redirect
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    if (window.$memberstackDom) {
+      window.$memberstackDom.getCurrentMember().then(function(res) {
+        if (res && res.data) {
+          onMsLoggedIn(res.data);
+        }
+      }).catch(function() {});
+    }
+  }, 800);
+});
+
+// Also check immediately after doAuth completes via Memberstack event
+if (typeof window.$memberstackDom !== 'undefined') {
+  window.$memberstackDom.onAuthChange(function(member) {
+    if (member) onMsLoggedIn(member);
+  });
+}
+</script>
+<script>
+// ── DATED ENTRY SYSTEM ──
+window.entryScores = {};
+
+function setEntryScore(sec, val) {
+  window.entryScores[sec] = val;
+  var container = document.getElementById('sc-' + sec);
+  if (!container) return;
+  container.querySelectorAll('.s-dot').forEach(function(btn) {
+    btn.classList.toggle('active', parseInt(btn.dataset.scoreVal) === val);
+  });
+  var msgs = {1:'Peace feels very distant today.',2:'Struggling to find footing.',3:'More unsettled than settled.',4:'Working through it.',5:'Finding some balance.',6:'More peaceful than not.',7:'Feeling grounded.',8:'Peace is present today.',9:'Deeply at peace.',10:'Completely at peace. ✦'};
+  var msg = document.getElementById('sc-' + sec + '-msg');
+  if (msg) msg.textContent = msgs[val] || '';
+}
+
+function getTodayLabel() {
+  var d = new Date();
+  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+}
+
+function getTodayKey() {
+  var d = new Date();
+  return d.toISOString().split('T')[0];
+}
+
+function newEntry(sec) {
+  // Clear current fields for a fresh entry
+  var prompts = document.getElementById(sec + '-prompts');
+  if (prompts) prompts.querySelectorAll('.entry-field').forEach(function(f) { f.value = ''; });
+  entryScores[sec] = null;
+  var container = document.getElementById('sc-' + sec);
+  if (container) container.querySelectorAll('.s-dot').forEach(function(b) { b.classList.remove('active'); });
+  var dateLabel = document.getElementById(sec + '-entry-date');
+  if (dateLabel) dateLabel.textContent = '📅 ' + getTodayLabel();
+}
+
+function getTimeOfDay() {
+  var h = new Date().getHours();
+  if (h < 12) return 'Morning';
+  if (h < 17) return 'Afternoon';
+  return 'Evening';
+}
+
+
+function renderEntries(sec, entries) {
+  var list = document.getElementById(sec + '-entries-list');
+  if (!list) return;
+  if (!entries || entries.length === 0) { list.innerHTML = '<p style="font-style:italic;color:var(--text-soft);font-size:.88rem;">No previous entries yet.</p>'; return; }
+  var PROMPTS = {
+    mind: ['What thoughts have been stealing my peace today?','What story am I telling myself — and is it true?','Can I choose silence over reaction today?','What is the kindest thought I can offer myself right now?'],
+    heart: ['Am I abandoning myself to keep the peace?','What conversation have I been avoiding?','Who brings peace into my life — and who drains it?','How do I feel when I say yes to what I truly want?'],
+    body: ['Did I feel physically tense today?','Where in my body do I feel peace?','What does "no" feel like in my body?','Have I made space for rest or joy today?'],
+    spirit: ['Am I in alignment with my values today?','What does my intuition say?','Does this choice move me toward freedom or fear?','What would peace do in this moment?'],
+    weekly: ['What did I protect my peace from this week?','What did I say yes to that cost me my peace?','What boundary needs reinforcement?','What would I do differently?','What does peace mean to me right now?']
+  };
+  list.innerHTML = entries.map(function(e, idx) {
+    var scoreStr = e.score ? '✦ Peace Score: ' + e.score + '/10' : '';
+    var body = '';
+    ['p1','p2','p3','p4'].forEach(function(k, i) {
+      if (e[k] && e[k].trim()) {
+        var q = PROMPTS[sec] ? PROMPTS[sec][i] : '';
+        body += '<p class="prev-entry-q">' + q + '</p><p class="prev-entry-a">' + e[k] + '</p>';
+      }
+    });
+    if (e.rel && e.rel.trim()) body += '<p class="prev-entry-q">I am releasing…</p><p class="prev-entry-a">' + e.rel + '</p>';
+    if (e.rec && e.rec.trim()) body += '<p class="prev-entry-q">I am reclaiming…</p><p class="prev-entry-a">' + e.rec + '</p>';
+    return '<div class="prev-entry-row" id="entry-row-' + sec + '-' + idx + '">' +
+      '<div class="prev-entry-hdr" data-sec="' + sec + '" data-idx="' + idx + '" onclick="toggleEntry(this.dataset.sec, this.dataset.idx)">' +
+      '<span class="prev-entry-date">' + e.dateLabel + '</span>' +
+      '<span class="prev-entry-score">' + scoreStr + '</span>' +
+      '<span class="prev-entry-chevron">▼</span></div>' +
+      '<div class="prev-entry-body">' + (body || '<p style="font-style:italic;color:var(--text-soft)">No content saved.</p>') + '</div></div>';
+  }).join('');
+}
+
+function toggleEntry(sec, idx) {
+  var row = document.getElementById('entry-row-' + sec + '-' + idx);
+  if (row) row.classList.toggle('open');
+}
+
+function loadAllEntries() {
+  var stored = JSON.parse(localStorage.getItem('peace-entries-v1') || '{}');
+  ['mind','heart','body','spirit','weekly'].forEach(function(sec) {
+    renderEntries(sec, stored[sec] || []);
+    var dateLabel = document.getElementById(sec + '-entry-date');
+    if (dateLabel) dateLabel.textContent = sec === 'weekly' ? '📅 ' + getCurrentWeekRange() : '📅 ' + getTodayLabel();
+  });
+  // Set week date display
+  var wd = document.getElementById('week-date-display');
+  if (wd) wd.textContent = getCurrentWeekRange();
+}
+
+// Load from cloud after login
+function loadEntriesFromCloud(cloudData) {
+  var stored = JSON.parse(localStorage.getItem('peace-entries-v1') || '{}');
+  var updated = false;
+  ['mind','heart','body','spirit'].forEach(function(sec) {
+    var key = 'entries-' + sec;
+    if (cloudData[key] && cloudData[key].length > 0) {
+      stored[sec] = cloudData[key];
+      updated = true;
+    }
+  });
+  if (updated) {
+    localStorage.setItem('peace-entries-v1', JSON.stringify(stored));
+    loadAllEntries();
+    var t = document.getElementById('save-toast');
+    if (t) { t.textContent = '✦ Entries restored from your account'; t.classList.add('show'); setTimeout(function() { t.classList.remove('show'); t.textContent = '✦ Entry saved'; }, 3000); }
+  }
+}
+
+// Load on page ready — only if logged in
+window.addEventListener('load', function() {
+  if (window._msCurrentMember) {
+    loadAllEntries();
+  }
+});
+</script>
+</head>
+<body>
+
+<!-- Botanical corners -->
+<svg class="bot bot-tl" viewBox="0 0 200 200" fill="none"><path d="M10 190 Q40 120 80 80 Q120 40 180 10" stroke="#7a9e7e" stroke-width="1.2" fill="none" opacity="0.55"/><ellipse cx="85" cy="75" rx="18" ry="10" transform="rotate(-40 85 75)" fill="#a8c5ac" opacity="0.38"/><ellipse cx="110" cy="55" rx="15" ry="8" transform="rotate(-55 110 55)" fill="#7a9e7e" opacity="0.3"/><ellipse cx="60" cy="100" rx="20" ry="9" transform="rotate(-25 60 100)" fill="#a8c5ac" opacity="0.26"/><ellipse cx="140" cy="38" rx="14" ry="7" transform="rotate(-65 140 38)" fill="#b39dcc" opacity="0.22"/><circle cx="45" cy="155" r="3" fill="#c9963a" opacity="0.38"/><circle cx="70" cy="130" r="2" fill="#c9963a" opacity="0.28"/></svg>
+<svg class="bot bot-tr" viewBox="0 0 200 200" fill="none"><path d="M10 190 Q40 120 80 80 Q120 40 180 10" stroke="#b39dcc" stroke-width="1.1" fill="none" opacity="0.38"/><ellipse cx="85" cy="75" rx="18" ry="10" transform="rotate(-40 85 75)" fill="#b39dcc" opacity="0.28"/><ellipse cx="110" cy="55" rx="15" ry="8" transform="rotate(-55 110 55)" fill="#7a9e7e" opacity="0.24"/><circle cx="150" cy="38" r="2.5" fill="#c9963a" opacity="0.3"/></svg>
+<svg class="bot bot-br" viewBox="0 0 200 200" fill="none"><path d="M10 190 Q40 120 80 80 Q120 40 180 10" stroke="#c9963a" stroke-width="1" fill="none" opacity="0.28"/><ellipse cx="85" cy="75" rx="18" ry="10" transform="rotate(-40 85 75)" fill="#e8c97a" opacity="0.28"/><ellipse cx="110" cy="55" rx="15" ry="8" transform="rotate(-55 110 55)" fill="#a8c5ac" opacity="0.26"/><circle cx="50" cy="150" r="3" fill="#b39dcc" opacity="0.34"/></svg>
+
+<!-- ═══════════════ LANDING ═══════════════ -->
+<div id="view-landing" class="view">
+  <nav class="lp-nav">
+    <div class="nav-logo">Is This Worth <span>My Peace?</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a><a href="#inside">What's Inside</a><a href="#pricing">Pricing</a>
+    </div>
+    <button class="btn-nav" onclick="openApp()">Start Free →</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <svg class="hero-bot-svg h-tl" viewBox="0 0 280 280" fill="none"><path d="M10 270 Q60 160 120 100 Q180 40 265 10" stroke="#7a9e7e" stroke-width="1.3" fill="none" opacity="0.5"/><ellipse cx="120" cy="96" rx="22" ry="12" transform="rotate(-42 120 96)" fill="#a8c5ac" opacity="0.36"/><ellipse cx="155" cy="68" rx="18" ry="10" transform="rotate(-58 155 68)" fill="#7a9e7e" opacity="0.3"/><ellipse cx="88" cy="130" rx="24" ry="11" transform="rotate(-28 88 130)" fill="#a8c5ac" opacity="0.27"/><circle cx="52" cy="210" r="3.5" fill="#c9963a" opacity="0.36"/></svg>
+    <svg class="hero-bot-svg h-tr" viewBox="0 0 240 240" fill="none"><path d="M10 230 Q50 140 100 90 Q155 38 225 10" stroke="#b39dcc" stroke-width="1.2" fill="none" opacity="0.4"/><ellipse cx="100" cy="88" rx="20" ry="11" transform="rotate(-40 100 88)" fill="#b39dcc" opacity="0.32"/><circle cx="185" cy="38" r="3" fill="#c9963a" opacity="0.3"/></svg>
+    <svg class="hero-bot-svg h-br" viewBox="0 0 250 250" fill="none" style="bottom:0;right:0;transform:scale(-1);"><path d="M10 240 Q52 148 104 96 Q160 40 240 10" stroke="#c9963a" stroke-width="1" fill="none" opacity="0.28"/><ellipse cx="104" cy="95" rx="21" ry="11" transform="rotate(-40 104 95)" fill="#e8c97a" opacity="0.27"/><circle cx="52" cy="188" r="3" fill="#b39dcc" opacity="0.34"/></svg>
+    <div class="hero-content">
+      <div class="dove-anim">
+        <svg width="76" height="64" viewBox="0 0 120 100" fill="none">
+          <path d="M60 50 Q28 18 8 28 Q24 38 40 44 Q18 50 12 66 Q33 55 54 61" fill="rgba(179,157,204,0.72)" stroke="#b39dcc" stroke-width="1.1"/>
+          <path d="M60 50 Q92 22 106 29 Q96 41 80 47 Q102 51 109 66 Q88 55 66 62" fill="rgba(179,157,204,0.65)" stroke="#b39dcc" stroke-width="1.1"/>
+          <ellipse cx="60" cy="55" rx="20" ry="13" fill="rgba(220,215,235,0.88)" stroke="#b39dcc" stroke-width="0.9"/>
+          <path d="M40 55 Q50 72 60 74 Q70 72 80 55" fill="rgba(205,200,225,0.72)" stroke="#b39dcc" stroke-width="0.8"/>
+          <circle cx="51" cy="50" r="2.8" fill="#7b5ea7" opacity="0.72"/>
+          <path d="M73 66 Q84 69 90 74" stroke="#7a9e7e" stroke-width="1.6" fill="none"/>
+          <ellipse cx="79" cy="65" rx="6" ry="3" transform="rotate(-20 79 65)" fill="#7a9e7e" opacity="0.72"/>
+          <ellipse cx="86" cy="68" rx="6" ry="3" transform="rotate(-10 86 68)" fill="#a8c5ac" opacity="0.72"/>
+        </svg>
+      </div>
+      <p class="hero-eyebrow">A Reflective Journal for Your Inner Peace</p>
+      <h1 class="hero-title">Is This Worth<br><em>My Peace?</em></h1>
+      <div class="hero-div"><span style="color:var(--gold);font-size:1.05rem">♡</span></div>
+      <p class="hero-sub">A sacred space to guard your peace, heal your heart,<br>and return to yourself — one reflection at a time.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="openApp()">✦ Open the Journal</button>
+        <button class="btn-secondary" onclick="document.getElementById('inside').scrollIntoView({behavior:'smooth'})">See What's Inside</button>
+      </div>
+      <p class="hero-note">Full premium preview — all sections unlocked 🔓</p>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="trust-item"><span style="font-size:1.05rem">🌿</span><span class="trust-text">Botanical Design</span></div>
+    <div class="trust-item"><span style="font-size:1.05rem">🔒</span><span class="trust-text">Your Words Stay Private</span></div>
+    <div class="trust-item"><span style="font-size:1.05rem">✦</span><span class="trust-text">4 Sections of Reflection</span></div>
+    <div class="trust-item"><span style="font-size:1.05rem">🕊️</span><span class="trust-text">Year of Peace Journey</span></div>
+    <div class="trust-item"><span style="font-size:1.05rem">♡</span><span class="trust-text">Cancel Anytime</span></div>
+  </div>
+
+  <section class="lp-section feat-bg" id="features">
+    <div class="lp-inner">
+      <p class="s-label">✦ Why This Journal ✦</p>
+      <h2 class="s-heading">Built for those who are <em>done giving their peace away</em></h2>
+      <p class="s-body">More than a journal — a daily practice of returning to yourself, one honest question at a time.</p>
+      <div class="feat-grid">
+        <div class="feat-card"><span class="feat-icon">🧠</span><h3 class="feat-title">Guided Prompts That Go Deep</h3><p class="feat-desc">Each question is crafted to cut through the noise and reach what actually matters — across mind, heart, body, and spirit.</p></div>
+        <div class="feat-card"><span class="feat-icon">🌬️</span><h3 class="feat-title">Peace Rituals Before You Write</h3><p class="feat-desc">Every section opens with a grounding ritual — breathwork, body scans, or intention-setting — so you arrive ready to tell the truth.</p></div>
+        <div class="feat-card"><span class="feat-icon">📊</span><h3 class="feat-title">Daily Peace Score</h3><p class="feat-desc">Track your emotional weather with a 1–10 peace measure. Watch patterns emerge. Notice what costs you peace — and what restores it.</p></div>
+        <div class="feat-card"><span class="feat-icon">🍂</span><h3 class="feat-title">Release &amp; Reclaim Spreads</h3><p class="feat-desc">What are you letting go? What are you taking back? This practice creates profound clarity about where your energy belongs.</p></div>
+        <div class="feat-card"><span class="feat-icon">🕊️</span><h3 class="feat-title">A Year of Peace Journey</h3><p class="feat-desc">Twelve curated monthly intentions guide your year — plus a premium space to set your own annual theme, Word of the Year, and a personal intention for every month.</p></div>
+        <div class="feat-card"><span class="feat-icon">🌸</span><h3 class="feat-title">Beautiful Enough to Open Daily</h3><p class="feat-desc">Watercolor botanical design, elegant typography, and a calming palette that makes opening your journal feel like a breath of fresh air.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section" id="inside">
+    <div class="lp-inner">
+      <p class="s-label">✦ What's Inside ✦</p>
+      <h2 class="s-heading">Four dimensions of <em>inner peace</em></h2>
+      <p class="s-body">Each section explores a different layer of your wellbeing — with prompts, rituals, and affirmations designed to work together.</p>
+      <div class="inside-grid">
+        <div class="inside-card ic-mind"><span class="ic-icon">🧠</span><h3 class="ic-title">Mind</h3><p class="ic-desc">Overthinking · Clarity<br>The stories you tell yourself</p></div>
+        <div class="inside-card ic-heart"><span class="ic-icon">❤️</span><h3 class="ic-title">Heart</h3><p class="ic-desc">Relationships · Boundaries<br>People-pleasing · Self-worth</p></div>
+        <div class="inside-card ic-body"><span class="ic-icon">🌿</span><h3 class="ic-title">Body</h3><p class="ic-desc">Tension · Rest · Energy<br>Somatic awareness · Burnout</p></div>
+        <div class="inside-card ic-spirit"><span class="ic-icon">✨</span><h3 class="ic-title">Spirit</h3><p class="ic-desc">Purpose · Intuition<br>Alignment · Freedom vs. fear</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section test-bg">
+    <div class="lp-inner">
+      <p class="s-label">✦ Early Readers Say ✦</p>
+      <h2 class="s-heading">The question that <em>changed everything</em></h2>
+      <p class="s-body" style="margin-bottom:38px;">A few words from those who have sat with this practice.</p>
+      <div class="test-grid">
+        <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">"I cried on my very first entry. I hadn't realized how much I'd been abandoning myself to keep everyone else comfortable. This journal gave me permission to stop."</p><p class="t-name">— Maya R., 34</p></div>
+        <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">"The Peace Score alone changed my whole week. I started noticing exactly which situations and people were costing me. I finally knew where to set limits."</p><p class="t-name">— Dominique T., 29</p></div>
+        <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">"I've tried so many journals. This one is different. The rituals before each section actually slow me down enough to tell the truth. I open it every single morning."</p><p class="t-name">— Serena K., 41</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section" id="pricing">
+    <div class="lp-inner">
+      <p class="s-label">✦ Simple Pricing ✦</p>
+      <h2 class="s-heading">Your peace is <em>priceless</em>.<br>The journal isn't.</h2>
+      <p class="s-body" style="margin-bottom:44px;">Start free. Upgrade when you're ready to go deeper.</p>
+      <div class="price-grid">
+        <div class="price-card">
+          <p class="price-plan">Free Forever</p><div class="price-amt">$0</div><p class="price-per">always free</p>
+          <ul class="price-feats">
+            <li><span class="pfy">✦</span>Mind section — full access</li>
+            <li><span class="pfy">✦</span>3 guided prompts</li>
+            <li><span class="pfy">✦</span>Daily Peace Score</li>
+            <li><span class="pfy">✦</span>Year of Peace — curated intentions</li>
+            <li><span class="pfn">—</span><span style="color:var(--text-soft)">Heart, Body &amp; Spirit</span></li>
+            <li><span class="pfn">—</span><span style="color:var(--text-soft)">Release &amp; Reclaim spreads</span></li>
+          </ul>
+          <button class="btn-plan free" onclick="openApp()">Start Free</button>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">Most Popular</div>
+          <p class="price-plan">Premium Annual</p><div class="price-amt">$39</div><p class="price-per">per year · save 35%</p>
+          <ul class="price-feats">
+            <li><span class="pfy">✦</span>Everything in Free</li>
+            <li><span class="pfy">✦</span>All 4 sections unlocked</li>
+            <li><span class="pfy">✦</span>16 deep prompts total</li>
+            <li><span class="pfy">✦</span>Release &amp; Reclaim spreads</li>
+            <li><span class="pfy">✦</span>Year of Peace + My Intentions</li>
+            <li><span class="pfy">✦</span>Monthly new prompt drops</li>
+            <li><span class="pfy">✦</span>Downloadable PDF export</li>
+          </ul>
+          <button class="btn-plan paid" onclick="openApp()">✨ Get Full Access</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="email-sec" id="early-access">
+    <div style="max-width:540px;margin:0 auto;">
+      <p class="s-label">✦ Join the Waitlist ✦</p>
+      <h2 class="s-heading" style="margin-bottom:11px;">Be first to <em>guard your peace</em></h2>
+      <p style="font-style:italic;color:var(--text-mid);font-size:1.03rem;line-height:1.7;">Sign up for early access and receive a free printable Peace Journal page as our gift to you.</p>
+      <div class="email-form">
+        <input class="email-input" type="email" id="email-field" placeholder="you@worthmypeace.com"/>
+        <button class="btn-primary" onclick="submitEmail()">✦ Join Waitlist</button>
+      </div>
+      <p class="email-note">No spam. Only peace. Unsubscribe anytime. 🌿</p>
+      <p class="email-toast" id="email-toast">✦ You're on the list! Your free gift is on its way.</p>
+    </div>
+  </section>
+
+  <footer class="lp-footer">
+    <p class="foot-logo">Is This Worth My Peace?</p>
+    <p class="foot-tag">A daily practice of returning to yourself.</p>
+    <div class="foot-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a><a href="#">Instagram</a><a href="https://worthmypeace.com" target="_blank">worthmypeace.com</a></div>
+    <p class="foot-copy">© 2025 Is This Worth My Peace? · Made with intention 🕊️  ·  <a href="https://worthmypeace.com" style="color:var(--text-soft);text-decoration:none;">worthmypeace.com</a></p>
+  </footer>
+</div>
+
+<!-- ═══════════════ JOURNAL APP ═══════════════ -->
+<div id="view-app" class="view active">
+
+  
+  <div class="app-topbar">
+    <div class="app-logo">Is This Worth <span>My Peace?</span></div>
+    <div class="app-bar-right">
+      <a href="https://worthmypeace.etsy.com" target="_blank" style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#c9963a;text-decoration:none;padding:6px 12px;border:1px solid rgba(201,150,58,.4);border-radius:20px;">🛍 Shop</a>
+      <a href="https://instagram.com/worth_my_peace" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;text-decoration:none;font-size:14px;">📷</a>
+      <button id="ms-login-btn" class="ms-btn ms-btn-login" onclick="showAuthModal('login')">Log In</button>
+      <button id="ms-signup-btn" class="ms-btn ms-btn-signup" onclick="showAuthModal('signup')">Sign Up Free</button>
+      <div id="ms-logged-in" style="display:none;align-items:center;gap:7px;">
+        <span id="ms-email" style="font-family:'Josefin Sans',sans-serif;font-size:9px;color:#9b8fa8;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+        <button class="ms-btn ms-btn-login" onclick="msLogout()" style="background:transparent;color:#9b8fa8;border:1px solid rgba(179,157,204,.3);">Log Out</button>
+      </div>
+      <button class="btn-back" onclick="window.location.href='https://worthmypeace.com'">← Home</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <header class="j-cover">
+      <div class="dove-anim">
+        <svg width="62" height="52" viewBox="0 0 120 100" fill="none">
+          <path d="M60 50 Q28 18 8 28 Q24 38 40 44 Q18 50 12 66 Q33 55 54 61" fill="rgba(179,157,204,0.7)" stroke="#b39dcc" stroke-width="1"/>
+          <path d="M60 50 Q92 22 106 29 Q96 41 80 47 Q102 51 109 66 Q88 55 66 62" fill="rgba(179,157,204,0.62)" stroke="#b39dcc" stroke-width="1"/>
+          <ellipse cx="60" cy="55" rx="18" ry="12" fill="rgba(218,213,233,0.88)" stroke="#b39dcc" stroke-width="0.85"/>
+          <path d="M42 55 Q50 70 60 72 Q70 70 78 55" fill="rgba(203,198,223,0.7)" stroke="#b39dcc" stroke-width="0.75"/>
+          <circle cx="52" cy="50" r="2.5" fill="#7b5ea7" opacity="0.7"/>
+          <path d="M72 65 Q82 68 88 72" stroke="#7a9e7e" stroke-width="1.4" fill="none"/>
+          <ellipse cx="78" cy="64" rx="5" ry="3" transform="rotate(-20 78 64)" fill="#7a9e7e" opacity="0.7"/>
+          <ellipse cx="84" cy="67" rx="5" ry="3" transform="rotate(-10 84 67)" fill="#a8c5ac" opacity="0.7"/>
+        </svg>
+      </div>
+      <p class="j-eyebrow">A Reflective Journal</p>
+      <h1 class="j-title">Is This Worth<br><em>My Peace?</em></h1>
+      <div class="j-divider"><span style="color:var(--gold)">♡</span></div>
+      <p class="j-sub">A sacred space to return to yourself, guard what matters,<br>and choose peace — again and again.</p>
+    </header>
+
+    <nav class="sec-nav">
+      <button class="tab-btn active" data-s="mind" onclick="switchSec('mind')">🧠 Mind</button>
+      <button class="tab-btn" data-s="heart" onclick="switchSec('heart')">❤️ Heart</button>
+      <button class="tab-btn" data-s="body" onclick="switchSec('body')">🌿 Body</button>
+      <button class="tab-btn" data-s="spirit" onclick="switchSec('spirit')">✨ Spirit</button>
+      <button class="tab-btn" data-s="weekly" onclick="switchSec('weekly')">📋 Weekly</button>
+      <button class="tab-btn" data-s="year" onclick="switchSec('year')">🕊️ Year of Peace</button>
+      <button class="tab-btn" data-s="insights" onclick="switchSec('insights')">📊 My Insights</button>
+    </nav>
+
+    <!-- ── MIND ── -->
+    
+
+<div id="sec-mind" class="sec-panel active">
+      <div class="sec-hdr"><span class="sec-icon">🧠</span><h2 class="sec-title">Mind</h2><p class="sec-desc">Thoughts, clarity, and the stories we tell ourselves.<br>What are you carrying that was never yours to hold?</p></div>
+      <div class="ritual"><span class="ritual-icon">🌬️</span><div><p class="ritual-lbl">Peace Ritual — Before You Write</p><p class="ritual-txt">Take three slow breaths. Inhale 4 counts, hold 4, release 6. Place one hand over your heart and whisper: <em>"I am safe to tell the truth here."</em></p></div></div>
+      <div class="entry-date-bar">
+        <span class="entry-date-label" id="mind-entry-date">📅 Today</span>
+        <button class="btn-new-entry" onclick="newEntry('mind')">+ New Entry</button>
+      </div>
+      <div class="prompts" id="mind-prompts">
+        <div class="p-card">
+          <p class="p-num">Prompt 01</p>
+          <p class="p-q">What thoughts have been stealing my peace today?</p>
+          <textarea class="p-ta entry-field" placeholder="Write freely… there is no wrong answer here." data-entry-key="p1"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 02</p>
+          <p class="p-q">What story am I telling myself — and is it true?</p>
+          <textarea class="p-ta entry-field" placeholder="Explore gently…" data-entry-key="p2"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 03</p>
+          <p class="p-q">Can I choose silence over reaction today? What would that feel like?</p>
+          <textarea class="p-ta entry-field" placeholder="Imagine the freedom…" data-entry-key="p3"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 04</p>
+          <p class="p-q">What is the kindest thought I can offer myself right now?</p>
+          <textarea class="p-ta entry-field" placeholder="Speak to yourself as you would a beloved friend…" data-entry-key="p4"></textarea>
+        </div>
+      </div>
+      
+      <div class="score-card">
+        <p class="sc-lbl">✦ Daily Peace Score ✦</p>
+        <h3 class="sc-title">How is my peace today?</h3>
+        <p class="sc-sub">1 = deeply unsettled · 10 = completely at peace</p>
+        <div class="score-dots" id="sc-mind"><button class="s-dot" onclick="setEntryScore('mind',1)" data-score-val="1">1</button><button class="s-dot" onclick="setEntryScore('mind',2)" data-score-val="2">2</button><button class="s-dot" onclick="setEntryScore('mind',3)" data-score-val="3">3</button><button class="s-dot" onclick="setEntryScore('mind',4)" data-score-val="4">4</button><button class="s-dot" onclick="setEntryScore('mind',5)" data-score-val="5">5</button><button class="s-dot" onclick="setEntryScore('mind',6)" data-score-val="6">6</button><button class="s-dot" onclick="setEntryScore('mind',7)" data-score-val="7">7</button><button class="s-dot" onclick="setEntryScore('mind',8)" data-score-val="8">8</button><button class="s-dot" onclick="setEntryScore('mind',9)" data-score-val="9">9</button><button class="s-dot" onclick="setEntryScore('mind',10)" data-score-val="10">10</button></div>
+        <p class="sc-msg" id="sc-mind-msg"></p>
+      </div>
+      
+      <div class="rr">
+        <div class="rr-card rr-rel"><span class="rr-icon">🍂</span><p class="rr-lbl">I am releasing…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Thoughts, worries, narratives I'm letting go of…" data-entry-key="rel"></textarea>
+        </div>
+        <div class="rr-card rr-rec"><span class="rr-icon">🌱</span><p class="rr-lbl">I am reclaiming…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Clarity, calm, confidence, presence…" data-entry-key="rec"></textarea>
+        </div>
+      </div>
+      <button class="btn-save-entry" onclick="doSaveEntry('mind')">✦ Save Entry</button>
+      <div class="prev-entries" id="mind-prev-entries">
+        <p class="prev-entries-label">✦ Previous Entries</p>
+        <div id="mind-entries-list"></div>
+      </div>
+    </div>
+    <div id="sec-heart" class="sec-panel">
+      <div class="sec-hdr"><span class="sec-icon">❤️</span><h2 class="sec-title">Heart</h2><p class="sec-desc">Emotions, relationships, and the space you hold for yourself.<br>What does your heart need you to hear today?</p></div>
+      <div class="ritual"><span class="ritual-icon">💗</span><div><p class="ritual-lbl">Peace Ritual — Before You Write</p><p class="ritual-txt">Close your eyes and place both hands over your heart. Feel its steady rhythm. Say aloud: <em>"I am allowed to feel this."</em></p></div></div>
+      <div class="entry-date-bar">
+        <span class="entry-date-label" id="heart-entry-date">📅 Today</span>
+        <button class="btn-new-entry" onclick="newEntry('heart')">+ New Entry</button>
+      </div>
+      <div class="prompts" id="heart-prompts">
+        <div class="p-card">
+          <p class="p-num">Prompt 01</p>
+          <p class="p-q">Am I abandoning myself to keep the peace with others?</p>
+          <textarea class="p-ta entry-field" placeholder="Be honest with yourself…" data-entry-key="p1"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 02</p>
+          <p class="p-q">What conversation or boundary have I been avoiding out of fear?</p>
+          <textarea class="p-ta entry-field" placeholder="Name it gently…" data-entry-key="p2"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 03</p>
+          <p class="p-q">Who brings genuine peace into my life — and who drains it?</p>
+          <textarea class="p-ta entry-field" placeholder="Notice without judgment…" data-entry-key="p3"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 04</p>
+          <p class="p-q">How do I feel when I say "yes" to what I truly want?</p>
+          <textarea class="p-ta entry-field" placeholder="Sit with this feeling…" data-entry-key="p4"></textarea>
+        </div>
+      </div>
+      
+      <div class="score-card">
+        <p class="sc-lbl">✦ Daily Peace Score ✦</p>
+        <h3 class="sc-title">How is my peace today?</h3>
+        <p class="sc-sub">1 = deeply unsettled · 10 = completely at peace</p>
+        <div class="score-dots" id="sc-heart"><button class="s-dot" onclick="setEntryScore('heart',1)" data-score-val="1">1</button><button class="s-dot" onclick="setEntryScore('heart',2)" data-score-val="2">2</button><button class="s-dot" onclick="setEntryScore('heart',3)" data-score-val="3">3</button><button class="s-dot" onclick="setEntryScore('heart',4)" data-score-val="4">4</button><button class="s-dot" onclick="setEntryScore('heart',5)" data-score-val="5">5</button><button class="s-dot" onclick="setEntryScore('heart',6)" data-score-val="6">6</button><button class="s-dot" onclick="setEntryScore('heart',7)" data-score-val="7">7</button><button class="s-dot" onclick="setEntryScore('heart',8)" data-score-val="8">8</button><button class="s-dot" onclick="setEntryScore('heart',9)" data-score-val="9">9</button><button class="s-dot" onclick="setEntryScore('heart',10)" data-score-val="10">10</button></div>
+        <p class="sc-msg" id="sc-heart-msg"></p>
+      </div>
+      
+      <div class="rr">
+        <div class="rr-card rr-rel"><span class="rr-icon">🍂</span><p class="rr-lbl">I am releasing…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Thoughts, worries, narratives I'm letting go of…" data-entry-key="rel"></textarea>
+        </div>
+        <div class="rr-card rr-rec"><span class="rr-icon">🌱</span><p class="rr-lbl">I am reclaiming…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Clarity, calm, confidence, presence…" data-entry-key="rec"></textarea>
+        </div>
+      </div>
+      <button class="btn-save-entry" onclick="doSaveEntry('heart')">✦ Save Entry</button>
+      <div class="prev-entries" id="heart-prev-entries">
+        <p class="prev-entries-label">✦ Previous Entries</p>
+        <div id="heart-entries-list"></div>
+      </div>
+    </div>
+    <div id="sec-body" class="sec-panel">
+      <div class="sec-hdr"><span class="sec-icon">🌿</span><h2 class="sec-title">Body</h2><p class="sec-desc">Physical boundaries, rest, energy, and the wisdom your body holds.<br>Your body knows things your mind hasn't accepted yet.</p></div>
+      <div class="ritual"><span class="ritual-icon">🌊</span><div><p class="ritual-lbl">Peace Ritual — Before You Write</p><p class="ritual-txt">Starting at the crown of your head, slowly move your awareness downward. Notice where you carry tension. Breathe into those places.</p></div></div>
+      <div class="entry-date-bar">
+        <span class="entry-date-label" id="body-entry-date">📅 Today</span>
+        <button class="btn-new-entry" onclick="newEntry('body')">+ New Entry</button>
+      </div>
+      <div class="prompts" id="body-prompts">
+        <div class="p-card">
+          <p class="p-num">Prompt 01</p>
+          <p class="p-q">Did I feel physically tense today? When and why?</p>
+          <textarea class="p-ta entry-field" placeholder="Scan your body gently…" data-entry-key="p1"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 02</p>
+          <p class="p-q">Where in my body do I feel peace? Can I rest there for a moment?</p>
+          <textarea class="p-ta entry-field" placeholder="Breathe into that place…" data-entry-key="p2"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 03</p>
+          <p class="p-q">What does "no" feel like in my body? What about "yes"?</p>
+          <textarea class="p-ta entry-field" placeholder="Notice the difference…" data-entry-key="p3"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 04</p>
+          <p class="p-q">Have I made space for rest or joy today? What does my body need?</p>
+          <textarea class="p-ta entry-field" placeholder="Listen without judgment…" data-entry-key="p4"></textarea>
+        </div>
+      </div>
+      
+      <div class="score-card">
+        <p class="sc-lbl">✦ Daily Peace Score ✦</p>
+        <h3 class="sc-title">How is my peace today?</h3>
+        <p class="sc-sub">1 = deeply unsettled · 10 = completely at peace</p>
+        <div class="score-dots" id="sc-body"><button class="s-dot" onclick="setEntryScore('body',1)" data-score-val="1">1</button><button class="s-dot" onclick="setEntryScore('body',2)" data-score-val="2">2</button><button class="s-dot" onclick="setEntryScore('body',3)" data-score-val="3">3</button><button class="s-dot" onclick="setEntryScore('body',4)" data-score-val="4">4</button><button class="s-dot" onclick="setEntryScore('body',5)" data-score-val="5">5</button><button class="s-dot" onclick="setEntryScore('body',6)" data-score-val="6">6</button><button class="s-dot" onclick="setEntryScore('body',7)" data-score-val="7">7</button><button class="s-dot" onclick="setEntryScore('body',8)" data-score-val="8">8</button><button class="s-dot" onclick="setEntryScore('body',9)" data-score-val="9">9</button><button class="s-dot" onclick="setEntryScore('body',10)" data-score-val="10">10</button></div>
+        <p class="sc-msg" id="sc-body-msg"></p>
+      </div>
+      
+      <div class="rr">
+        <div class="rr-card rr-rel"><span class="rr-icon">🍂</span><p class="rr-lbl">I am releasing…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Thoughts, worries, narratives I'm letting go of…" data-entry-key="rel"></textarea>
+        </div>
+        <div class="rr-card rr-rec"><span class="rr-icon">🌱</span><p class="rr-lbl">I am reclaiming…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Clarity, calm, confidence, presence…" data-entry-key="rec"></textarea>
+        </div>
+      </div>
+      <button class="btn-save-entry" onclick="doSaveEntry('body')">✦ Save Entry</button>
+      <div class="prev-entries" id="body-prev-entries">
+        <p class="prev-entries-label">✦ Previous Entries</p>
+        <div id="body-entries-list"></div>
+      </div>
+    </div>
+    <div id="sec-spirit" class="sec-panel">
+      <div class="sec-hdr"><span class="sec-icon">✨</span><h2 class="sec-title">Spirit</h2><p class="sec-desc">Purpose, intuition, and alignment with what you truly value.<br>What does your deepest self already know?</p></div>
+      <div class="ritual"><span class="ritual-icon">🕯️</span><div><p class="ritual-lbl">Peace Ritual — Before You Write</p><p class="ritual-txt">Begin with: <em>"Dear Peace, today I…"</em> and write without stopping for two minutes before beginning the prompts.</p></div></div>
+      <div class="entry-date-bar">
+        <span class="entry-date-label" id="spirit-entry-date">📅 Today</span>
+        <button class="btn-new-entry" onclick="newEntry('spirit')">+ New Entry</button>
+      </div>
+      <div class="prompts" id="spirit-prompts">
+        <div class="p-card">
+          <p class="p-num">Prompt 01</p>
+          <p class="p-q">Am I in alignment with my values today? Where do I feel the gap?</p>
+          <textarea class="p-ta entry-field" placeholder="Be truthful with yourself…" data-entry-key="p1"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 02</p>
+          <p class="p-q">What does my intuition say about this situation?</p>
+          <textarea class="p-ta entry-field" placeholder="Listen beneath the noise…" data-entry-key="p2"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 03</p>
+          <p class="p-q">Does this choice move me toward freedom — or fear?</p>
+          <textarea class="p-ta entry-field" placeholder="Trust what you feel…" data-entry-key="p3"></textarea>
+        </div>
+        <div class="p-card">
+          <p class="p-num">Prompt 04</p>
+          <p class="p-q">What would peace do in this moment?</p>
+          <textarea class="p-ta entry-field" placeholder="Let peace answer…" data-entry-key="p4"></textarea>
+        </div>
+      </div>
+      
+      <div class="score-card">
+        <p class="sc-lbl">✦ Daily Peace Score ✦</p>
+        <h3 class="sc-title">How is my peace today?</h3>
+        <p class="sc-sub">1 = deeply unsettled · 10 = completely at peace</p>
+        <div class="score-dots" id="sc-spirit"><button class="s-dot" onclick="setEntryScore('spirit',1)" data-score-val="1">1</button><button class="s-dot" onclick="setEntryScore('spirit',2)" data-score-val="2">2</button><button class="s-dot" onclick="setEntryScore('spirit',3)" data-score-val="3">3</button><button class="s-dot" onclick="setEntryScore('spirit',4)" data-score-val="4">4</button><button class="s-dot" onclick="setEntryScore('spirit',5)" data-score-val="5">5</button><button class="s-dot" onclick="setEntryScore('spirit',6)" data-score-val="6">6</button><button class="s-dot" onclick="setEntryScore('spirit',7)" data-score-val="7">7</button><button class="s-dot" onclick="setEntryScore('spirit',8)" data-score-val="8">8</button><button class="s-dot" onclick="setEntryScore('spirit',9)" data-score-val="9">9</button><button class="s-dot" onclick="setEntryScore('spirit',10)" data-score-val="10">10</button></div>
+        <p class="sc-msg" id="sc-spirit-msg"></p>
+      </div>
+      
+      <div class="rr">
+        <div class="rr-card rr-rel"><span class="rr-icon">🍂</span><p class="rr-lbl">I am releasing…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Thoughts, worries, narratives I'm letting go of…" data-entry-key="rel"></textarea>
+        </div>
+        <div class="rr-card rr-rec"><span class="rr-icon">🌱</span><p class="rr-lbl">I am reclaiming…</p>
+          <textarea class="p-ta entry-field" style="min-height:110px;" placeholder="Clarity, calm, confidence, presence…" data-entry-key="rec"></textarea>
+        </div>
+      </div>
+      <button class="btn-save-entry" onclick="doSaveEntry('spirit')">✦ Save Entry</button>
+      <div class="prev-entries" id="spirit-prev-entries">
+        <p class="prev-entries-label">✦ Previous Entries</p>
+        <div id="spirit-entries-list"></div>
+      </div>
+    </div>
+    <div id="sec-weekly" class="sec-panel">
+      <div class="sec-hdr"><span class="sec-icon">📋</span><h2 class="sec-title">Weekly Check-In</h2><p class="sec-desc">A recurring practice to see the bigger patterns.<br>Return to these prompts at the end of each week.</p></div>
+      <div class="weekly-card">
+        <h3 class="wk-title" style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);font-weight:400;">Week of</h3>
+        <p id="week-date-display" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--purple);font-style:italic;margin-bottom:0;padding:10px 13px;background:rgba(255,255,255,.4);border-radius:10px;border:1px solid rgba(179,157,204,.2);"></p>
+      </div>
+      <div class="entry-date-bar">
+        <span class="entry-date-label" id="weekly-entry-date">📅 This week</span>
+        <button class="btn-new-entry" onclick="newEntry('weekly')">+ New Entry</button>
+      </div>
+      <div class="prompts" id="weekly-prompts">
+        <div class="p-card"><p class="p-num">Reflection 01</p><p class="p-q">What did I protect my peace from this week?</p><textarea class="p-ta entry-field" placeholder="Notice the moments you chose yourself…" data-entry-key="p1"></textarea></div>
+        <div class="p-card"><p class="p-num">Reflection 02</p><p class="p-q">What did I say "yes" to that cost me my peace?</p><textarea class="p-ta entry-field" placeholder="No shame — just honest observation…" data-entry-key="p2"></textarea></div>
+        <div class="p-card"><p class="p-num">Reflection 03</p><p class="p-q">What boundary needs reinforcement this coming week?</p><textarea class="p-ta entry-field" placeholder="Name it clearly…" data-entry-key="p3"></textarea></div>
+        <div class="p-card"><p class="p-num">Reflection 04</p><p class="p-q">What would I do differently if I could replay this week?</p><textarea class="p-ta entry-field" placeholder="With compassion, not criticism…" data-entry-key="p4"></textarea></div>
+        <div class="p-card"><p class="p-num">Reflection 05</p><p class="p-q">What does peace mean to me right now, in this season of my life?</p><textarea class="p-ta entry-field" placeholder="This answer will change — that's allowed…" data-entry-key="p5"></textarea></div>
+      </div>
+      <div class="score-card">
+        <p class="sc-lbl">✦ Weekly Peace Average ✦</p>
+        <h3 class="sc-title">Overall, how was my peace this week?</h3>
+        <p class="sc-sub">1 = depleted · 10 = deeply at peace</p>
+        <div class="score-dots" id="sc-weekly"><button class="s-dot" onclick="setEntryScore('weekly',1)" data-score-val="1">1</button><button class="s-dot" onclick="setEntryScore('weekly',2)" data-score-val="2">2</button><button class="s-dot" onclick="setEntryScore('weekly',3)" data-score-val="3">3</button><button class="s-dot" onclick="setEntryScore('weekly',4)" data-score-val="4">4</button><button class="s-dot" onclick="setEntryScore('weekly',5)" data-score-val="5">5</button><button class="s-dot" onclick="setEntryScore('weekly',6)" data-score-val="6">6</button><button class="s-dot" onclick="setEntryScore('weekly',7)" data-score-val="7">7</button><button class="s-dot" onclick="setEntryScore('weekly',8)" data-score-val="8">8</button><button class="s-dot" onclick="setEntryScore('weekly',9)" data-score-val="9">9</button><button class="s-dot" onclick="setEntryScore('weekly',10)" data-score-val="10">10</button></div>
+        <p class="sc-msg" id="sc-weekly-msg"></p>
+      </div>
+      <div class="aff-card"><p class="aff-lbl">✦ Weekly Closing ✦</p><p class="aff-txt">"Every week I choose peace,<br>I build a life that reflects my worth.<br>I am getting better at this."</p></div>
+      <button class="btn-save-entry" onclick="doSaveEntry('weekly')">✦ Save This Week's Entry</button>
+      <div class="prev-entries" id="weekly-prev-entries">
+        <p class="prev-entries-label">✦ Previous Weekly Check-Ins</p>
+        <div id="weekly-entries-list"></div>
+      </div>
+    </div>
+
+        <!-- ── YEAR OF PEACE ── -->
+    <div id="sec-year" class="sec-panel">
+      <div class="sec-hdr"><span class="sec-icon">🕊️</span><h2 class="sec-title">A Year of Peace</h2><p class="sec-desc">Curated intentions for each month — plus space to write your own.<br>Your peace, your words, your year.</p></div>
+      <div class="yop-tabs">
+        <button class="yop-tab active" data-yop="curated" onclick="switchYop('curated')">&#x1F54A;&#xFE0F; Curated Intentions</button>
+        <button class="yop-tab" data-yop="mine" onclick="switchYop('mine')">&#x2726; My Intentions</button>
+      </div>
+      <div id="yop-curated" class="yop-panel active">
+        <div class="months" id="months-list"></div>
+        <div class="yr-close"><span class="yr-heart">♡</span><p class="yr-txt">Each month, you returned to your center.<br>Each moment, you chose peace again.</p></div>
+      </div>
+      <div id="yop-mine" class="yop-panel">
+        <div class="annual-card">
+          <p class="annual-eyebrow">✦ My Intention for the Whole Year ✦</p>
+          <h3 class="annual-title">This year, I am committed to…</h3>
+          <p class="annual-sub">Set one overarching intention that anchors your entire year. Return to it whenever you feel lost. Let it be your compass.</p>
+          <textarea class="annual-ta" placeholder="Write your intention for the whole year… (e.g. &quot;This year I choose radical peace. I release what no longer serves me and reclaim my joy.&quot;)" data-key="my-year-intention"></textarea>
+          <div class="annual-divider"><span style="color:var(--gold);font-size:0.85rem;">♡</span></div>
+          <p class="annual-eyebrow" style="margin-bottom:6px;">✦ My Word of the Year ✦</p>
+          <p class="annual-sub" style="margin-bottom:12px;">One word that will guide every decision, every boundary, every choice you make this year.</p>
+          <textarea class="annual-ta" style="min-height:48px;" placeholder="One word… (e.g. Peace · Courage · Abundance · Clarity · Freedom · Enough)" data-key="my-year-word"></textarea>
+        </div>
+        <p style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-soft);text-align:center;margin-bottom:16px;">✦ My Monthly Intentions ✦</p>
+        <div id="my-months-list"></div>
+        <div class="intentions-close">
+          <span class="intentions-close-heart">♡</span>
+          <p class="intentions-close-txt">&ldquo;I set these intentions not as rules,<br>but as reminders of who I am becoming.&rdquo;</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="sec-insights" class="sec-panel">
+      <div class="sec-hdr"><span class="sec-icon">📊</span><h2 class="sec-title">My Insights</h2><p class="sec-desc">Your peace patterns, tension points, and personalized guidance.</p></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;">
+        <div style="background:rgba(255,255,255,.55);border:1px solid rgba(179,157,204,.18);border-radius:13px;padding:16px 12px;text-align:center;">
+          <div id="stat-entries" style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:#7b5ea7;line-height:1;">0</div>
+          <div style="font-family:'Josefin Sans',sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#9b8fa8;margin-top:4px;">Entries Written</div>
+        </div>
+        <div style="background:rgba(255,255,255,.55);border:1px solid rgba(179,157,204,.18);border-radius:13px;padding:16px 12px;text-align:center;">
+          <div id="stat-avg" style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:#7b5ea7;line-height:1;">—</div>
+          <div style="font-family:'Josefin Sans',sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#9b8fa8;margin-top:4px;">Avg Peace Score</div>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(232,223,242,.5),rgba(250,246,239,.95));border:1px solid rgba(179,157,204,.3);border-radius:16px;padding:24px 20px;margin-bottom:20px;text-align:center;">
+        <div style="font-size:1.4rem;margin-bottom:7px">✨</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:#7b5ea7;margin-bottom:6px;">Weekly Reflection — Premium</h3>
+        <p style="font-style:italic;color:#6b5f72;font-size:.88rem;line-height:1.55;margin-bottom:14px;">Personalized insights based on your entries and peace scores.</p>
+        <p style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#9b8fa8;margin-bottom:12px;">From <strong style="font-size:1.1rem;font-family:'Cormorant Garamond',serif;color:#7b5ea7;letter-spacing:0;text-transform:none;">$4.99</strong>/month</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="upgradeMonthly()" style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:12px 20px;border-radius:30px;border:none;cursor:pointer;background:#7b5ea7;color:white;">✨ Monthly · $4.99</button>
+          <button onclick="upgradeAnnual()" style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:12px 20px;border-radius:30px;border:none;cursor:pointer;background:#c9963a;color:white;">⭐ Annual · $39</button>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(123,94,167,.07),rgba(201,150,58,.07));border:1px solid rgba(123,94,167,.2);border-radius:16px;padding:24px;margin-bottom:20px;">
+        <p style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#7a9e7e;margin-bottom:7px;">✦ Your Weekly Reflection ✦</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:#7b5ea7;margin-bottom:5px;">Personalized Insight</h3>
+        <p style="font-style:italic;color:#6b5f72;font-size:.88rem;margin-bottom:16px;line-height:1.6;">Generate a personalized weekly reflection based on your journal entries.</p>
+        <div id="ai-output" style="display:none"><div id="ai-text" style="font-family:'Crimson Pro',serif;font-size:1rem;color:#3a3040;line-height:1.75;white-space:pre-wrap;margin-bottom:14px;"></div></div>
+        <button id="generate-btn" onclick="window._isPremium ? generateInsights() : upgradeMonthly()" style="font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:12px 22px;border-radius:30px;border:none;cursor:pointer;background:#7b5ea7;color:white;display:flex;align-items:center;gap:8px;"><span>✨</span><span id="gen-btn-label">Generate My Weekly Reflection</span></button>
+        <p style="font-style:italic;color:#9b8fa8;font-size:.78rem;margin-top:10px;">Your entries are processed privately and never stored.</p>
+      </div>
+      <div style="background:rgba(214,232,216,.25);border:1px solid rgba(122,158,126,.28);border-radius:14px;padding:20px;margin-bottom:20px;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#7b5ea7;margin-bottom:5px;">🌿 Weekly Peace Digest</h3>
+        <p style="font-style:italic;color:#6b5f72;font-size:.88rem;margin-bottom:12px;line-height:1.6;">Receive your weekly insights every Sunday.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="email" id="digest-email" placeholder="your@email.com" style="font-size:.95rem;padding:10px 14px;border-radius:30px;border:1.5px solid rgba(179,157,204,.28);background:rgba(255,255,255,.75);outline:none;flex:1;min-width:160px;color:#3a3040;"/>
+          <button onclick="signupDigest()" style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:10px 18px;border-radius:30px;border:none;cursor:pointer;background:#7a9e7e;color:white;">✦ Subscribe Free</button>
+        </div>
+        <p id="digest-ok" style="display:none;font-style:italic;color:#7a9e7e;font-size:.88rem;margin-top:8px;">✦ Signed up! First digest arrives Sunday. 🕊️</p>
+      </div>
+    </div>
+
+  </div><!-- /app-body -->
+
+  <div class="save-bar" style="background:transparent;border:none;padding:8px 0;">
+    <div class="save-toast" id="save-toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--purple);color:white;padding:10px 24px;border-radius:30px;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;box-shadow:0 4px 20px rgba(123,94,167,.4);z-index:9999;">✦ Entry saved</div>
+  </div>
+
+</div><!-- /view-app -->
+
+<script>
+function openApp(){document.getElementById('view-landing').classList.remove('active');document.getElementById('view-app').classList.add('active');window.scrollTo(0,0);}
+function backToLanding(){document.getElementById('view-app').classList.remove('active');document.getElementById('view-landing').classList.add('active');window.scrollTo(0,0);}
+
+const months=[
+  {name:"January",   aff:"I begin with calm intention."},
+  {name:"February",  aff:"I nurture love within and around me."},
+  {name:"March",     aff:"I grow through what I understand."},
+  {name:"April",     aff:"I treat myself with compassion."},
+  {name:"May",       aff:"I honor the pace of my peace."},
+  {name:"June",      aff:"I protect my peace with patience and grace."},
+  {name:"July",      aff:"I radiate joy without fear or restraint."},
+  {name:"August",    aff:"I trust the timing of my transformation."},
+  {name:"September", aff:"I release what no longer supports me."},
+  {name:"October",   aff:"I find strength in stillness."},
+  {name:"November",  aff:"I am grateful for the lessons that facilitate my peace."},
+  {name:"December",  aff:"I rejuvenate in the peace I've created."},
+];
+document.addEventListener('DOMContentLoaded',function(){
+  var ml=document.getElementById('months-list');
+  if(!ml) return;
+  months.forEach(function(m,i){
+    var row=document.createElement('div');
+    row.className='m-row';
+    row.innerHTML='<span class="m-name">'+m.name+'</span><span class="m-dash">—</span><span class="m-aff">'+m.aff+'</span><div class="m-note"><textarea class="p-ta" style="min-height:72px;" placeholder="My reflection for '+m.name+'…" data-key="year-'+m.name.toLowerCase()+'"></textarea></div>';
+    row.addEventListener('click',function(e){if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT') return; row.classList.toggle('open');});
+    ml.appendChild(row);
+  });
+});
+
+
+
+
+// Peace scores
+var scores = {};
+function setScore(section, val) {
+  scores[section] = val;
+  document.querySelectorAll('[data-score="'+section+'"]').forEach(function(btn) {
+    btn.classList.toggle('active', parseInt(btn.dataset.val) === val);
+  });
+}
+
+async function saveEntries(){
+  const data={};
+  document.querySelectorAll('[data-key]').forEach(t=>{if(t.value!==undefined) data[t.dataset.key]=t.value;});
+  data.scores=scores;
+  data.savedAt = new Date().toISOString();
+  // Save to localStorage as backup
+  localStorage.setItem('peace-j-v4',JSON.stringify(data));
+  // Save to Memberstack JSON if logged in
+  if (window.$memberstackDom && window._msCurrentMember) {
+    try {
+      await window.$memberstackDom.updateMemberJSON({ json: data });
+    } catch(e) {
+      console.log('Cloud save failed, localStorage backup saved:', e.message);
+    }
+  }
+  const t=document.getElementById('save-toast');
+  if(t){ t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+}
+function clearEntries(){
+  if(!confirm('Clear all journal entries? This cannot be undone.')) return;
+  document.querySelectorAll('[data-key]').forEach(t=>{if(t.value!==undefined) t.value='';});
+  localStorage.removeItem('peace-j-v4');
+}
+window.addEventListener('load',()=>{
+  const s=localStorage.getItem('peace-j-v4'); if(!s) return;
+  try{
+    const d=JSON.parse(s);
+    document.querySelectorAll('[data-key]').forEach(t=>{if(d[t.dataset.key]!==undefined) t.value=d[t.dataset.key];});
+    if(d.scores) Object.entries(d.scores).forEach(([k,v])=>setScore(k,parseInt(v)));
+  }catch(e){}
+});
+
+function submitEmail(){
+  const e=document.getElementById('email-field').value.trim();
+  if(!e||!e.includes('@')){alert('Please enter a valid email.');return;}
+  document.getElementById('email-field').value='';
+  document.getElementById('email-toast').classList.add('show');
+}
+const ef=document.getElementById('email-field');
+if(ef) ef.addEventListener('keydown',e=>{if(e.key==='Enter') submitEmail();});
+
+// Year of Peace sub-tabs
+function switchYop(id){
+  document.querySelectorAll('.yop-tab').forEach(b=>b.classList.toggle('active',b.dataset.yop===id));
+  document.querySelectorAll('.yop-panel').forEach(p=>p.classList.toggle('active',p.id==='yop-'+id));
+}
+
+// Build My Intentions monthly rows (full/unlocked version)
+window.addEventListener('DOMContentLoaded',()=>{
+  const myMonthsList=document.getElementById('my-months-list');
+  if(!myMonthsList) return;
+  const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  monthNames.forEach(mo=>{
+    const row=document.createElement('div');
+    row.className='my-month-row';
+    row.innerHTML=`<p class="my-month-label">${mo}</p><textarea class="my-month-ta" placeholder="My intention for ${mo}…" data-key="my-intention-${mo.toLowerCase()}"></textarea>`;
+    myMonthsList.appendChild(row);
+  });
+  // Restore saved values
+  const saved=localStorage.getItem('peace-j-v4')||localStorage.getItem('peace-j-v3');
+  if(saved){try{const d=JSON.parse(saved);document.querySelectorAll('.my-month-ta[data-key]').forEach(t=>{if(d[t.dataset.key]) t.value=d[t.dataset.key];});}catch(e){}}
+});
+
+</script>
+
+<div id="ms-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)document.getElementById('ms-overlay').style.display='none'">
+  <div style="background:white;border-radius:20px;padding:30px;max-width:380px;width:90%;position:relative;" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('ms-overlay').style.display='none'" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.2rem;cursor:pointer;">✕</button>
+    <!-- Login panel -->
+    <div id="ms-panel-login">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#7b5ea7;margin-bottom:8px;text-align:center;">Welcome back 🕊️</h2>
+      <p style="font-style:italic;color:#6b5f72;font-size:.9rem;text-align:center;margin-bottom:20px;">Log in to access your journal.</p>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">Email</label>
+        <input type="email" id="auth-email" placeholder="your@email.com" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1rem;width:100%;box-sizing:border-box;"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">Password</label>
+        <input type="password" id="auth-password" placeholder="Your password" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1rem;width:100%;box-sizing:border-box;"/>
+      </div>
+      <p id="auth-error" style="color:#e05252;font-size:.83rem;margin-bottom:8px;text-align:center;min-height:18px;"></p>
+      <button id="auth-btn" onclick="doAuth()" style="width:100%;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:30px;border:none;cursor:pointer;background:#7b5ea7;color:white;">✦ Log In</button>
+      <p style="text-align:center;margin-top:10px;font-style:italic;color:#6b5f72;font-size:.85rem;">No account? <a onclick="showAuthModal('signup')" style="color:#7b5ea7;cursor:pointer;text-decoration:underline;">Sign up free</a></p>
+      <p style="text-align:center;margin-top:6px;"><a onclick="showAuthModal('forgot')" style="font-style:italic;color:#9b8fa8;font-size:.8rem;cursor:pointer;text-decoration:underline;">Forgot password?</a></p>
+    </div>
+    <!-- Signup panel -->
+    <div id="ms-panel-signup" style="display:none">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#7b5ea7;margin-bottom:8px;text-align:center;">Start your practice 🌿</h2>
+      <p style="font-style:italic;color:#6b5f72;font-size:.9rem;text-align:center;margin-bottom:20px;">Create your account — Mind section is always free.</p>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">Email</label>
+        <input type="email" id="signup-email" placeholder="your@email.com" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1rem;width:100%;box-sizing:border-box;"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">Password</label>
+        <input type="password" id="signup-password" placeholder="Min. 8 characters" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1rem;width:100%;box-sizing:border-box;"/>
+      </div>
+      <p id="signup-error" style="color:#e05252;font-size:.83rem;margin-bottom:8px;text-align:center;min-height:18px;"></p>
+      <button id="signup-btn" onclick="doSignup()" style="width:100%;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:30px;border:none;cursor:pointer;background:#7b5ea7;color:white;">✦ Create Free Account</button>
+      <p style="text-align:center;margin-top:10px;font-style:italic;color:#6b5f72;font-size:.85rem;">Have an account? <a onclick="showAuthModal('login')" style="color:#7b5ea7;cursor:pointer;text-decoration:underline;">Log in</a></p>
+    </div>
+    <!-- Forgot panel -->
+    <div id="ms-panel-forgot" style="display:none">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#7b5ea7;margin-bottom:8px;text-align:center;">Reset Password</h2>
+      <p style="font-style:italic;color:#6b5f72;font-size:.9rem;text-align:center;margin-bottom:20px;">Enter your email and we'll send a 6-digit code.</p>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">Email</label>
+        <input type="email" id="forgot-email" placeholder="your@email.com" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1rem;width:100%;box-sizing:border-box;"/>
+      </div>
+      <p id="forgot-error" style="color:#e05252;font-size:.83rem;margin-bottom:8px;text-align:center;min-height:18px;"></p>
+      <button onclick="msForgotPassword()" style="width:100%;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:30px;border:none;cursor:pointer;background:#7b5ea7;color:white;">✦ Send Code</button>
+      <p style="text-align:center;margin-top:10px;"><a onclick="showAuthModal('login')" style="font-style:italic;color:#7b5ea7;font-size:.85rem;cursor:pointer;text-decoration:underline;">← Back to login</a></p>
+    </div>
+    <!-- OTP + new password panel -->
+    <div id="ms-panel-otp" style="display:none">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#7b5ea7;margin-bottom:8px;text-align:center;">Enter Your Code</h2>
+      <p style="font-style:italic;color:#6b5f72;font-size:.9rem;text-align:center;margin-bottom:20px;">Enter the 6-digit code from your email and choose a new password.</p>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">6-Digit Code</label>
+        <input type="text" id="otp-code" placeholder="000000" maxlength="6" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1.4rem;width:100%;box-sizing:border-box;text-align:center;letter-spacing:.3em;"/>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px;">
+        <label style="font-family:'Josefin Sans',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6b5f72;">New Password</label>
+        <input type="password" id="otp-password" placeholder="Min. 8 characters" style="padding:11px 13px;border-radius:10px;border:1.5px solid rgba(179,157,204,.28);font-size:1rem;width:100%;box-sizing:border-box;"/>
+      </div>
+      <p id="otp-error" style="color:#e05252;font-size:.83rem;margin-bottom:8px;text-align:center;min-height:18px;"></p>
+      <button onclick="msResetWithOTP()" style="width:100%;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px;border-radius:30px;border:none;cursor:pointer;background:#7b5ea7;color:white;">✦ Reset Password</button>
+      <p style="text-align:center;margin-top:10px;"><a onclick="showAuthModal('forgot')" style="font-style:italic;color:#7b5ea7;font-size:.85rem;cursor:pointer;text-decoration:underline;">← Resend code</a></p>
+    </div>
+  </div>
+</div>
+<div class="pw-wall" id="pw-heart">
+  <div class="pw-icon">❤️</div>
+  <h3 class="pw-title">Unlock Heart</h3>
+  <p class="pw-sub">The Heart section is available with a premium membership — from just $4.99/month.</p>
+  <button class="pw-btn pw-btn-m" onclick="upgradeMonthly()">✨ Monthly · $4.99</button>
+  <button class="pw-btn pw-btn-a" onclick="upgradeAnnual()">⭐ Annual · $39</button>
+  <p class="pw-note">Already a member? <a onclick="this.closest('.pw-wall').style.display='none';showAuthModal('login')">Log in to unlock</a></p>
+</div>
+<div class="pw-wall" id="pw-body">
+  <div class="pw-icon">🌿</div>
+  <h3 class="pw-title">Unlock Body</h3>
+  <p class="pw-sub">The Body section is available with a premium membership — from just $4.99/month.</p>
+  <button class="pw-btn pw-btn-m" onclick="upgradeMonthly()">✨ Monthly · $4.99</button>
+  <button class="pw-btn pw-btn-a" onclick="upgradeAnnual()">⭐ Annual · $39</button>
+  <p class="pw-note">Already a member? <a onclick="this.closest('.pw-wall').style.display='none';showAuthModal('login')">Log in to unlock</a></p>
+</div>
+<div class="pw-wall" id="pw-spirit">
+  <div class="pw-icon">✨</div>
+  <h3 class="pw-title">Unlock Spirit</h3>
+  <p class="pw-sub">The Spirit section is available with a premium membership — from just $4.99/month.</p>
+  <button class="pw-btn pw-btn-m" onclick="upgradeMonthly()">✨ Monthly · $4.99</button>
+  <button class="pw-btn pw-btn-a" onclick="upgradeAnnual()">⭐ Annual · $39</button>
+  <p class="pw-note">Already a member? <a onclick="this.closest('.pw-wall').style.display='none';showAuthModal('login')">Log in to unlock</a></p>
+</div>
+<div class="pw-wall" id="pw-year">
+  <div class="pw-icon">🕊️</div>
+  <h3 class="pw-title">Unlock My Intentions</h3>
+  <p class="pw-sub">The My Intentions section is available with a premium membership — from just $4.99/month.</p>
+  <button class="pw-btn pw-btn-m" onclick="upgradeMonthly()">✨ Monthly · $4.99</button>
+  <button class="pw-btn pw-btn-a" onclick="upgradeAnnual()">⭐ Annual · $39</button>
+  <p class="pw-note">Already a member? <a onclick="this.closest('.pw-wall').style.display='none';showAuthModal('login')">Log in to unlock</a></p>
+</div>
+<script>
+// Premium unlock
+window.onMsLoggedIn = (function(orig) {
+  return function(member) {
+    if (orig) orig(member);
+    // getCurrentMember returns { data: { planConnections: [...] } }
+    // loginMember returns { member: { planConnections: [...] } }
+    // Handle both structures
+    var planConns = (member && member.planConnections) ||
+                    (member && member.data && member.data.planConnections) ||
+                    [];
+    var premium = ['pln_premium-monthly-7b1e0o38','pln_premium-annual-7h7d0jpj','pln_complimentary--85f10vzs'];
+    var isPremium = planConns.some(function(p) {
+      return p.active && premium.indexOf(p.planId) !== -1;
+    });
+    // Also unlock if member has ANY active plan (fallback)
+    if (!isPremium && planConns.length > 0) {
+      isPremium = planConns.some(function(p) { return p.active; });
+    }
+    if (isPremium) { 
+      unlockAll(); 
+      var lbl = document.getElementById('gen-btn-label');
+      if (lbl) lbl.textContent = 'Generate My Weekly Reflection';
+    } else {
+      var lbl = document.getElementById('gen-btn-label');
+      if (lbl) lbl.textContent = '✨ Upgrade to Generate Reflection';
+    }
+  };
+})(window.onMsLoggedIn);
+</script>
+<script>
+// Forgot password
+var _resetEmail = '';
+async function msForgotPassword() {
+  var email = document.getElementById('forgot-email').value.trim();
+  var err = document.getElementById('forgot-error');
+  err.textContent = '';
+  if (!email) { err.textContent = 'Please enter your email.'; return; }
+  if (!window.$memberstackDom) { err.textContent = 'Auth not ready. Please refresh.'; return; }
+  try {
+    await window.$memberstackDom.sendMemberResetPasswordEmail({ email: email });
+    _resetEmail = email;
+    showAuthModal('otp');
+  } catch(e) { err.textContent = e.message || 'Failed to send reset email.'; }
+}
+
+async function msResetWithOTP() {
+  var token = document.getElementById('otp-code').value.trim();
+  var newPass = document.getElementById('otp-password').value;
+  var err = document.getElementById('otp-error');
+  err.textContent = '';
+  if (!token || token.length !== 6) { err.textContent = 'Please enter the 6-digit code.'; return; }
+  if (!newPass || newPass.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
+  if (!window.$memberstackDom) { err.textContent = 'Auth not ready. Please refresh.'; return; }
+  try {
+    await window.$memberstackDom.resetMemberPassword({ token: token, newPassword: newPass });
+    err.style.color = '#7a9e7e';
+    err.textContent = '✦ Password reset! Logging you in...';
+    setTimeout(function() { showAuthModal('login'); }, 1500);
+  } catch(e) { err.textContent = e.message || 'Invalid code. Please try again.'; }
+}
+
+// Logout
+async function msLogout() {
+  if (window.$memberstackDom) { try { await window.$memberstackDom.logout(); } catch(e) {} }
+  window._isPremium = false;
+  window._msCurrentMember = null;
+  // Clear visible fields for privacy — data stays in localStorage for when they log back in
+  document.querySelectorAll('.entry-field').forEach(function(f) { f.value = ''; });
+  document.querySelectorAll('.s-dot').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.prev-entry-body').forEach(function(b) { b.style.display = 'none'; });
+  document.querySelectorAll('.prev-entries').forEach(function(b) { b.innerHTML = ''; });
+  // Clear AI reflection output
+  var aiOut = document.getElementById('ai-output');
+  var aiTxt = document.getElementById('ai-text');
+  if (aiOut) aiOut.style.display = 'none';
+  if (aiTxt) aiTxt.innerHTML = '';
+  var genBtn = document.getElementById('generate-btn');
+  if (genBtn) genBtn.innerHTML = '<span>✨</span><span id="gen-btn-label">Generate My Weekly Reflection</span>';
+  document.getElementById('ms-login-btn').style.display = 'inline-block';
+  document.getElementById('ms-signup-btn').style.display = 'inline-block';
+  document.getElementById('ms-logged-in').style.display = 'none';
+}
+
+// Generate insights
+async function generateInsights() {
+  var btn = document.getElementById('generate-btn');
+  var out = document.getElementById('ai-output');
+  var txt = document.getElementById('ai-text');
+  btn.disabled = true;
+  btn.innerHTML = '<span>✨</span><span>Reflecting...</span>';
+  out.style.display = 'block';
+  txt.textContent = 'Crafting your personal reflection...';
+  var d = JSON.parse(localStorage.getItem('peace-j-v4') || '{}');
+  var entries = [];
+  var storedEntries = JSON.parse(localStorage.getItem('peace-entries-v1') || '{}');
+  var cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 7);
+  var cutoffKey = cutoff.toISOString().split('T')[0];
+  ['mind','heart','body','spirit'].forEach(function(s) {
+    var secEntries = storedEntries[s] || [];
+    secEntries.filter(function(e) { return e.date >= cutoffKey; }).forEach(function(e) {
+      ['p1','p2','p3','p4','rel','rec'].forEach(function(k) {
+        if (e[k] && e[k].trim().length > 10) entries.push('['+s.toUpperCase()+' - '+e.dateLabel+'] '+e[k].trim());
+      });
+    });
+  });
+  if (entries.length === 0) { txt.textContent = 'Write some journal entries first!'; btn.disabled=false; btn.innerHTML='<span>✨</span><span>Generate My Weekly Reflection</span>'; return; }
+  var msToken = (window.$memberstackDom && typeof window.$memberstackDom.getMemberCookie === 'function') ? window.$memberstackDom.getMemberCookie() : null;
+  if (!msToken) { txt.textContent = 'Please log in again to generate your reflection.'; btn.disabled=false; btn.innerHTML='<span>✨</span><span>Generate My Weekly Reflection</span>'; return; }
+  try {
+    var resp = await fetch('/.netlify/functions/reflect', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + msToken},
+      body: JSON.stringify({entries: entries})
+    });
+    var data = {};
+    try { data = await resp.json(); } catch(parseErr) {}
+    if (!resp.ok || data.error) {
+      txt.textContent = data.error || 'Unable to generate right now. Please try again.';
+    } else {
+      var rawText = String(data.text || 'Unable to generate right now.')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    // Convert markdown to readable HTML
+    var formatted = rawText
+      .replace(/^### (.*)/gm, '<strong>$1</strong>')
+      .replace(/^## (.*)/gm, '<strong>$1</strong>')
+      .replace(/^# (.*)/gm, '<strong>$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid rgba(179,157,204,.3);margin:12px 0;">')
+      .replace(/\n\n/g, '</p><p style="margin-top:10px;">')
+      .replace(/\n/g, '<br>');
+    txt.innerHTML = '<p>' + formatted + '</p>';
+    }
+    btn.innerHTML = '<span>✨</span><span>Regenerate Reflection</span>';
+    btn.disabled = false;
+  } catch(e) {
+    txt.textContent = 'Error: ' + (e.message || 'Unable to generate right now. Please try again.');
+    btn.innerHTML = '<span>✨</span><span>Try Again</span>';
+    btn.disabled = false;
+  }
+}
+
+// Digest signup
+function signupDigest() {
+  var e = document.getElementById('digest-email');
+  if (!e||!e.value||!e.value.includes('@')) { alert('Please enter a valid email.'); return; }
+  var form = document.createElement('form');
+  form.method='POST'; form.action='https://worthmypeace.us14.list-manage.com/subscribe/post?u=8a5d96bba34a3b1a2b0021323&id=50bf1c5082&f_id=00cccee0f0'; form.target='_blank'; form.style.display='none';
+  var ef=document.createElement('input'); ef.type='email'; ef.name='EMAIL'; ef.value=e.value.trim();
+  var hf=document.createElement('input'); hf.type='text'; hf.name='b_8a5d96bba34a3b1a2b0021323_50bf1c5082'; hf.value=''; hf.tabIndex=-1;
+  form.appendChild(ef); form.appendChild(hf);
+  document.body.appendChild(form); form.submit(); document.body.removeChild(form);
+  e.value='';
+  document.getElementById('digest-ok').style.display='block';
+}
+
+// Update onMsLoggedIn to show logged-in state
+var _pwOrigLogin = window.onMsLoggedIn;
+window.onMsLoggedIn = function(member) {
+  window._msCurrentMember = member;
+  if (_pwOrigLogin) _pwOrigLogin(member);
+  // Load cloud-saved entries
+  if (window.$memberstackDom) {
+    window.$memberstackDom.getMemberJSON().then(function(res) {
+      if (res && res.data && Object.keys(res.data).length > 0) {
+        loadEntriesFromCloud(res.data);
+      } else {
+        loadAllEntries();
+      }
+    }).catch(function() { loadAllEntries(); });
+  }
+  // Update header UI
+  var lb = document.getElementById('ms-login-btn');
+  var sb = document.getElementById('ms-signup-btn');
+  var li = document.getElementById('ms-logged-in');
+  var em = document.getElementById('ms-email');
+  if (lb) lb.style.display = 'none';
+  if (sb) sb.style.display = 'none';
+  if (li) li.style.display = 'flex';
+  if (em) {
+    var email = (member.auth && member.auth.email) || 
+                (member.email) || 
+                (member.data && member.data.email) || '';
+    em.textContent = email;
+  }
+};
+
+// Insights tab render
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.tab-btn[data-s="insights"]').forEach(function(t) {
+    t.addEventListener('click', function() {
+      var d = JSON.parse(localStorage.getItem('peace-j-v4') || '{}');
+      var ec = 0;
+      ['mind','heart','body','spirit','weekly'].forEach(function(s) {
+        for (var i=1; i<=5; i++) {
+          var k = s==='weekly'?'week-p'+i:s+'-p'+i;
+          if (d[k] && d[k].trim().length > 10) ec++;
+        }
+      });
+      var el = document.getElementById('stat-entries');
+      if (el) el.textContent = ec;
+      var scores = d.scores || {};
+      var sv = Object.values(scores).map(Number).filter(function(n){return n>0;});
+      var avg = sv.length ? (sv.reduce(function(a,b){return a+b;},0)/sv.length).toFixed(1) : '—';
+      var el2 = document.getElementById('stat-avg');
+      if (el2) el2.textContent = avg;
+    });
+  });
+});
+</script>
+<script>
+function renderInsights() {
+  var stored = JSON.parse(localStorage.getItem('peace-entries-v1') || '{}');
+  var ec = 0;
+  var allScores = [];
+  ['mind','heart','body','spirit','weekly'].forEach(function(s) {
+    var entries = stored[s] || [];
+    entries.forEach(function(e) {
+      var hasContent = ['p1','p2','p3','p4','p5','rel','rec'].some(function(k) {
+        return e[k] && e[k].trim().length > 5;
+      });
+      if (hasContent) ec++;
+      if (e.score) allScores.push(parseInt(e.score));
+    });
+  });
+  var el = document.getElementById('stat-entries');
+  if (el) el.textContent = ec;
+  var avg = allScores.length ? (allScores.reduce(function(a,b){return a+b;},0)/allScores.length).toFixed(1) : '—';
+  var el2 = document.getElementById('stat-avg');
+  if (el2) el2.textContent = avg;
+}
+
+// Call renderInsights when insights tab is clicked
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('[data-s="insights"]').forEach(function(t) {
+    t.addEventListener('click', function() {
+      setTimeout(renderInsights, 100);
+    });
+  });
+});
+</script>
+<script>
+function getCurrentWeekRange() {
+  var now = new Date();
+  var day = now.getDay();
+  var monday = new Date(now);
+  monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1));
+  var sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  var opts = { month: 'long', day: 'numeric' };
+  var start = monday.toLocaleDateString('en-US', opts);
+  var end = sunday.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  return start + ' – ' + end;
+}
+
+// Set week date when weekly tab is clicked
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('[data-s="weekly"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var el = document.getElementById('week-date-display');
+      if (el) el.textContent = getCurrentWeekRange();
+    });
+  });
+  // Also set on load in case weekly is active
+  var el = document.getElementById('week-date-display');
+  if (el) el.textContent = getCurrentWeekRange();
+});
+</script>
+<script>
+function doSaveEntry(sec) {
+  var toast = document.getElementById('save-toast');
+  var now = new Date();
+  var h = now.getHours();
+  var timeLabel = h < 12 ? 'Morning' : h < 17 ? 'Afternoon' : 'Evening';
+  var entry = {
+    date: now.toISOString().split('T')[0],
+    dateLabel: now.toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric'}) + ' — ' + timeLabel,
+    time: now.toISOString(),
+    score: (window.entryScores && window.entryScores[sec]) ? window.entryScores[sec] : null
+  };
+  var prompts = document.getElementById(sec + '-prompts');
+  if (prompts) prompts.querySelectorAll('.entry-field').forEach(function(f) {
+    if (f.dataset.entryKey) entry[f.dataset.entryKey] = f.value;
+  });
+  var hasContent = ['p1','p2','p3','p4','p5','rel','rec'].some(function(k) {
+    return entry[k] && entry[k].trim().length > 0;
+  });
+  if (!hasContent) {
+    if (toast) { toast.textContent = 'Write something first'; toast.style.display='block'; setTimeout(function(){toast.style.display='none';},2000); }
+    return;
+  }
+  var stored = JSON.parse(localStorage.getItem('peace-entries-v1') || '{}');
+  if (!stored[sec]) stored[sec] = [];
+  stored[sec].unshift(entry);
+  stored[sec] = stored[sec].slice(0, 180);
+  localStorage.setItem('peace-entries-v1', JSON.stringify(stored));
+  if (prompts) prompts.querySelectorAll('.entry-field').forEach(function(f) { f.value = ''; });
+  window.window.entryScores[sec] = null;
+  document.querySelectorAll('#sc-' + sec + ' .s-dot').forEach(function(b) { b.classList.remove('active'); });
+  renderEntries(sec, stored[sec]);
+  if (typeof renderInsights === "function") renderInsights();
+  if (toast) { toast.textContent = '✦ ' + timeLabel + ' entry saved'; toast.style.display='block'; setTimeout(function(){toast.style.display='none';},2500); }
+  if (window.$memberstackDom && window._msCurrentMember) {
+    window.$memberstackDom.getMemberJSON().then(function(res) {
+      var d = (res && res.data) ? res.data : {};
+      d['entries-' + sec] = stored[sec];
+      window.$memberstackDom.updateMemberJSON({json:d}).catch(function(){});
+    }).catch(function(){});
+  }
+}
+
+</script>
+</body>
+</html>
