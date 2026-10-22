@@ -6,7 +6,7 @@ import memberstackAdmin from "@memberstack/admin";
 import { getStore } from "@netlify/blobs";
 
 // ---- Settings (each can be overridden with a Netlify environment variable) ----
-const MODEL = process.env.CLAUDE_MODEL || "claude-sonnet-4-6";
+const MODEL = process.env.CLAUDE_MODEL || "claude-haiku-5-5";
 const MAX_OUTPUT_TOKENS = 1200;                        // room for a full 250-350 word reflection on any model
 const DAILY_LIMIT = parseInt(process.env.REFLECTIONS_PER_DAY || "5", 10);
 const PREMIUM_PLANS = (process.env.PREMIUM_PLAN_IDS ||
