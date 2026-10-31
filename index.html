@@ -452,7 +452,9 @@ async function upgradeMonthly() {
       priceId: 'prc_premium-monthly-15g0amo'
     });
   } catch(e) {
-    alert('Unable to open checkout. Please try again.');
+    console.error('Checkout error:', e);
+    var why = (e && (e.message || (e.data && e.data.message))) || String(e);
+    alert('Unable to open checkout. Please try again.\n\n(' + why + ')');
   }
 }
 
@@ -468,7 +470,9 @@ async function upgradeAnnual() {
       priceId: 'prc_premium-annual-v07e0jrn'
     });
   } catch(e) {
-    alert('Unable to open checkout. Please try again.');
+    console.error('Checkout error:', e);
+    var why = (e && (e.message || (e.data && e.data.message))) || String(e);
+    alert('Unable to open checkout. Please try again.\n\n(' + why + ')');
   }
 }
 </script>
